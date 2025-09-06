@@ -1,0 +1,48 @@
+.number-input-field {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    margin: 20px 0;
+    margin-top: 60px;
+}
+
+.number-input-field button {
+    width: 48px;
+    height: 48px;
+    border: none;
+    border-radius: 50%;
+    background-color: #f5f5f5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.number-input-field button:hover {
+    background-color: #e0e0e0;
+}
+
+.number-input-field img {
+    width: 24px;
+    height: 24px;
+}
+
+.number-input-field input {
+    width: 80px;
+    text-align: center;
+    font-size: 28px;
+    font-weight: bold;
+    border: none;
+    background: transparent;
+}
+
+.number-input-field input:focus {
+    outline: none;
+}
+
+.number-input-field span {
+    font-size: 20px;
+    font-weight: 500;
+}
