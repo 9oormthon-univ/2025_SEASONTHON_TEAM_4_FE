@@ -1,0 +1,71 @@
+.screen {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    transition: background 1s ease-in-out;
+}
+
+.screen-1 {
+    background: #00bba9;
+}
+
+.screen-2 {
+    background: #f5f5f5;
+}
+
+.logo {
+    transition: all 1.5s ease-in-out;
+}
+.logo-up {
+    transform: translateY(-120px); /* 위로 이동 */
+}
+
+.logo-image {
+    width: 150px;
+    height: auto;
+}
+
+.content {
+    opacity: 0;
+    animation: fadeIn 2s ease forwards;
+    animation-delay: 0.5s;
+    text-align: center;
+}
+
+.app-name {
+    font-size: 28px;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.button-container {
+    position: absolute;
+    bottom: 60px;
+    display: flex;
+    gap: 12px;
+    opacity: 0;
+    animation: fadeInUp 1s ease forwards;
+}
+
+.action-button {
+    padding: 12px 24px;
+    border-radius: 8px;
+    border: none;
+    background-color: #4cafef;
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.action-button:hover {
+    background-color: #3797db;
+}
+
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+    }
+}

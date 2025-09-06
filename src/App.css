@@ -1,0 +1,21 @@
+/* 모바일 (아이폰 기준) */
+.app {
+    width: 100%;
+    max-width: 390px;
+    margin: 0 auto;
+    background: #f9f9f9;
+}
+
+/*!* 태블릿 이상 *!*/
+/*@media (min-width: 768px) {*/
+/*    .app {*/
+/*        max-width: 768px;*/
+/*    }*/
+/*}*/
+
+/*!* PC 이상 *!*/
+/*@media (min-width: 1024px) {*/
+/*    .app {*/
+/*        max-width: 1390px;*/
+/*    }*/
+/*}*/
