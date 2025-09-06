@@ -15,9 +15,9 @@ const SignUp_4 = () => {
         height: yup
             .number()
             .typeError("숫자를 입력해주세요!")
-            .min(1, "1cm 이상 입력해주세요!")
-            .max(200, "200cm 이하로 입력해주세요!")
-            .required("키를 입력해주세요!")
+            .min(1, "1cm 이상 선택해주세요!")
+            .max(200, "200cm 이하로 선택해주세요!")
+            .required("키를 선택해주세요!")
     })
 
     const { register, handleSubmit, formState: { errors, isValid }, setValue, watch } = useForm({
