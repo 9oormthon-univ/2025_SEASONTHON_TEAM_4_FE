@@ -34,7 +34,7 @@ const SignUp_2 = () => {
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <div className="text-area">
                         <h1>성별을</h1>
-                        <h1>선택해주세요!</h1>
+                        <h1>선택해줘</h1>
                     </div>
 
                     <div className="gender-grid">

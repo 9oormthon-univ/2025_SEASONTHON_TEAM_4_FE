@@ -31,8 +31,8 @@ const SignUp = () => {
             <div className="frame">
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <div className="text-area">
-                        <h1>이름을</h1>
-                        <h1>알려줄래요?</h1>
+                        <h1>안녕!</h1>
+                        <h1>너의 이름을 알려줘</h1>
                     </div>
                     <div>
                         <input className="input-box"
