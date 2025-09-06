@@ -3,16 +3,15 @@ import * as yup from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup'
 import {useNavigate} from "react-router-dom";
 import "./Signup.css";
-import "./Signup_2.css"
 
-const SignUp = () => {
+const SignUp_5 = () => {
     const navigate = useNavigate();
 
     const schema = yup.object().shape({
         name: yup.string()
-                 .min(1, "이름을 최소 1글자 이상 입력해주세요!")
-                 .max(8, "이름은 최대 8글자까지 입력할 수 있어요!")
-                 .required("이름을 입력해주세요!"),
+            .min(1, "이름을 최소 1글자 이상 입력해주세요!")
+            .max(8, "이름은 최대 8글자까지 입력할 수 있어요!")
+            .required("이름을 입력해주세요!"),
     })
 
     const {register, handleSubmit, formState: {errors, isValid}} = useForm({
@@ -22,12 +21,11 @@ const SignUp = () => {
 
     const onSubmit = (data) => {
         console.log('이름:', data.name);
-        navigate("/Signup_2");
+        navigate("/SignUp-2");
     }
 
     return (
         <>
-            <div className="title-bar"></div>
             <div className="frame">
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <div className="text-area">
@@ -51,4 +49,4 @@ const SignUp = () => {
     );
 };
 
-export default SignUp;
+export default SignUp_5;

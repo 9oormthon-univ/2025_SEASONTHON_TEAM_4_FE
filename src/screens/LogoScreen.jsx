@@ -25,7 +25,7 @@ function LogoScreen () {
                 </div>
                 {step === "second" && (
                     <>
-                        <h1 className="app-name">단짝</h1>
+                        <h1 className="app-name">단짝이</h1>
                         <h2 className="app-content">1형 당뇨인을 위한 AI 비서</h2>
                     </>
                 )}
