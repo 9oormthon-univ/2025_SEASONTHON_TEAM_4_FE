@@ -11,6 +11,7 @@ import Signup_6 from "./screens/Signup_6.jsx";
 import Signup_7 from "./screens/Signup_7.jsx";
 import Login from "./screens/Login.jsx";
 import "/src/App.css";
+import Signup_for_parents from "./screens/Signup_for_parents.jsx";
 
 function App() {
     return (
@@ -25,6 +26,7 @@ function App() {
                     <Route path="/Signup_5" element={<Signup_5 />} />
                     <Route path="/Signup_6" element={<Signup_6 />} />
                     <Route path="/Signup_7" element={<Signup_7/>} />
+                    <Route path="/Signup_for_parents" element={<Signup_for_parents/>} />
                     <Route path="/Login" element={<Login />} />
                 </Routes>
             </Router>

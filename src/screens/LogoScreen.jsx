@@ -34,11 +34,10 @@ function LogoScreen () {
             {step === "second" && (
                 <div className="bottom-buttons">
                     <button
-                        className="action-button kakao-login"
-                        onClick={() => navigate("/Signup")}
+                        className="action-button login-button"
+                        onClick={() => navigate("/Login")}
                     >
-                        <img src={kakao} alt="카카오 아이콘" className="kakao-icon" />
-                        카카오 로그인
+                        로그인
                     </button>
                     <button
                         className="action-button signup-button"
@@ -48,7 +47,7 @@ function LogoScreen () {
                     </button>
                     <button
                         className="action-button code-login"
-                        onClick={() => navigate("/Signup-with-code")}
+                        onClick={() => navigate("/Signup_for_parents")}
                     >
                         <span className="highlight">아이 코드</span>로 로그인하기
                     </button>
