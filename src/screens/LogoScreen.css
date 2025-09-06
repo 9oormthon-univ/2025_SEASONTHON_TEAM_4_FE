@@ -2,9 +2,8 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
     height: 100vh;
-    transition: background 1s ease-in-out;
 }
 
 .screen-1 {
@@ -12,14 +11,14 @@
 }
 
 .screen-2 {
-    background: #f5f5f5;
+    background: #ffffff;
 }
 
 .logo {
     transition: all 1.5s ease-in-out;
 }
 .logo-up {
-    transform: translateY(-120px); /* 위로 이동 */
+    transform: translateY(-10px);
 }
 
 .logo-image {
@@ -27,45 +26,93 @@
     height: auto;
 }
 
-.content {
-    opacity: 0;
-    animation: fadeIn 2s ease forwards;
-    animation-delay: 0.5s;
-    text-align: center;
+.top-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex:1;
 }
 
 .app-name {
-    font-size: 28px;
-    margin-bottom: 20px;
-    color: #333;
+    font-size: 40px;
+    margin: 0;
+    color: #00bba9;
 }
 
-.button-container {
-    position: absolute;
-    bottom: 60px;
+.app-content {
+    font-size: 24px;
+    color: #4B4B4B;
+    margin-top: 19px;
+    line-height: 26.5px;
+    text-align: center;
+}
+
+.bottom-buttons {
     display: flex;
-    gap: 12px;
-    opacity: 0;
-    animation: fadeInUp 1s ease forwards;
+    flex-direction: column;
+    gap: 16px;
+    margin-bottom: 16px;
 }
 
 .action-button {
-    padding: 12px 24px;
-    border-radius: 8px;
+    width: 350px;
+    height: 48px;
+    border-radius: 6px;
     border: none;
-    background-color: #4cafef;
-    color: white;
-    font-size: 1rem;
+    font-size: 16px;
     cursor: pointer;
-    transition: background 0.3s;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
 }
 
-.action-button:hover {
-    background-color: #3797db;
+.kakao-login {
+    background-color: #FEE500;
+    color: #000000;
+}
+
+.kakao-login:hover {
+    background-color: #e5d400;
+}
+
+.signup-button {
+    background-color: #EEEEEE;
+}
+
+.signup-button:hover {
+    background-color: #c9c9c9;
+}
+
+.code-login {
+    background-color: #ffffff;
+    color: #8E8E8E
+}
+
+.highlight {
+    color: #F66D56;
+    text-decoration: underline;
+}
+
+.code-login:hover {
+    background-color: #f2f2f2;
 }
 
 @keyframes fadeIn {
     to {
         opacity: 1;
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
     }
 }
