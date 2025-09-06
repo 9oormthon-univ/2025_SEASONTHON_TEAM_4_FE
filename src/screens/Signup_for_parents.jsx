@@ -30,7 +30,7 @@ const Signup_for_parents = () => {
         const valid = await checkCodeInDB(data.code);
         if (valid === true) {
             console.log('입력된 코드:', data.code);
-            navigate("/Signup_for_parents_2");
+            navigate("/Signup_success");
         } else {
             setError("code", { type: "manual", message: valid });
         }

@@ -29,8 +29,9 @@
     color: #000;
     font-size: 15px;
     font-weight: 600;
-    line-height: 40px;
+    line-height: 20px;
     margin-bottom: 40px;
+    letter-spacing: 1px;
 }
 
 .lower-text-area {
@@ -140,3 +141,10 @@
 /*    opacity: 1;*/
 /*    transform: translateY(0);*/
 /*}*/
+
+.signup-success-img {
+    display: block;
+    margin: 0 auto;
+    max-width: 80%;
+    height: auto;
+}
