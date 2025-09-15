@@ -1,32 +1,48 @@
-import { useForm } from 'react-hook-form'
-import * as yup from 'yup'
-import { yupResolver } from '@hookform/resolvers/yup'
-import { useNavigate } from 'react-router-dom'
-import "./Signup.css"
-import left from '../assets/left.png'
+import React from 'react';
+import { useForm } from 'react-hook-form';
+import * as yup from 'yup';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { useNavigate } from 'react-router-dom';
+import { useSignup } from '../../data/SignupData.jsx';
+import '../../styles/Signup.css';
+import left from '../../assets/left.png';
+
+const schema = yup.object().shape({
+    gender: yup.string().oneOf(['female', 'male']).required('성별을 선택해주세요!'),
+});
 
 const SignUp_2 = () => {
-    const navigate = useNavigate()
+    const navigate = useNavigate();
+    const { data, updateSignup } = useSignup();
 
-    const schema = yup.object().shape({
-        gender: yup.string().oneOf(['female', 'male']).required('성별을 선택해주세요!')
-    })
-
-    const { register, handleSubmit, formState: { errors, isValid }, watch } = useForm({
+    const {
+        register,
+        handleSubmit,
+        formState: { errors, isValid },
+        watch,
+    } = useForm({
         resolver: yupResolver(schema),
-        mode: 'onChange'
-    })
+        mode: 'onChange',
+        defaultValues: {
+            gender: data?.gender || '', // 저장된 값으로 기본값 유지
+        },
+    });
 
-    const selected = watch('gender')
+    const selected = watch('gender');
 
-    const onSubmit = (data) => {
-        console.log('성별:', data.gender)
-        navigate('/Signup_3') // 다음 단계로 이동하도록 수정
-    }
+    const onSubmit = (form) => {
+        updateSignup({ gender: form.gender }); // 공용 상태에 병합 저장
+        navigate('/Signup_3');                 // 다음 단계로 이동
+    };
 
     return (
         <>
-            <div className="title-bar after-first-page" onClick={() => navigate('/Signup')}>
+            <div
+                className="title-bar after-first-page"
+                onClick={() => navigate('/Signup_1')} // 이전 단계로
+                role="button"
+                tabIndex={0}
+            >
                 <img src={left} alt="left-button" />
             </div>
 
@@ -82,7 +98,7 @@ const SignUp_2 = () => {
                 </form>
             </div>
         </>
-    )
-}
+    );
+};
 
-export default SignUp_2
+export default SignUp_2;

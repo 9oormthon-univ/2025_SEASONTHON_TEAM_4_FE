@@ -1,0 +1,53 @@
+import React, { useEffect, useState } from "react";
+import {useNavigate} from "react-router-dom";
+import "../App.css";
+import logo from "../assets/logo.png";
+
+function InitialOnboarding() {
+    const [IsSplash, setIsSplash] = useState(true);
+    const [up, setUp] = useState(false);
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        const t = setTimeout(() => setUp(true), 3000);
+        return () => clearTimeout(t);
+    }, []);
+
+    const handleTransitionEnd = () => {
+        if (up) setIsSplash(false);
+    };
+
+    return (
+        <div className="screen">
+            {IsSplash ? (
+                <div className="screen-1">
+                    <img
+                        src={logo} alt="logo"
+                        className={`logo ${up ? "up" : ""}`}
+                        onTransitionEnd={handleTransitionEnd}
+                    />
+                </div>
+            ) : (
+                <div className="screen-2">
+                    <div className="logo-layer">
+                        <img src={logo} alt="logo" className="logo up" />
+                    </div>
+                    <div className="top-content">
+                        <h1 className="app-name">단짝이</h1>
+                        <p className="app-content">건강을 지켜주는 든든한 짝꿍</p>
+                    </div>
+                    <div className="bottom-buttons">
+                        <button className="action-button primary"
+                                onClick={()=>{navigate("/signup")}}>시작하기</button>
+                        <button className="action-button secondary"
+                                onClick={()=>{navigate("/Login")}}>로그인</button>
+                        <button className="action-button third"
+                                onClick={()=>{navigate("/Signup_for_parents")}}><span className="highlight">아이 코드</span>로 로그인하기</button>
+                    </div>
+                </div>
+            )}
+        </div>
+    );
+}
+
+export default InitialOnboarding;

@@ -1,51 +1,67 @@
-import { useForm } from 'react-hook-form'
-import * as yup from 'yup'
-import { yupResolver } from '@hookform/resolvers/yup'
-import { useNavigate } from 'react-router-dom'
-import "./Signup.css"
-import "./Signup_4.css"
-import left from '../assets/left.png'
-import plus from '../assets/plus.png'
-import minus from '../assets/minus.png'
+import { useForm } from 'react-hook-form';
+import * as yup from 'yup';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
+import { useSignup } from '../../data/SignupData.jsx';
+import '../../styles/Signup.css';
+import '../../styles/Signup_4.css';
+import left from '../../assets/left.png';
+import plus from '../../assets/plus.png';
+import minus from '../../assets/minus.png';
+
+const schema = yup.object().shape({
+    weight: yup
+        .number()
+        .typeError('숫자를 입력해주세요!')
+        .min(1, '1kg 이상 선택해주세요!')
+        .max(200, '200kg 이하로 선택해주세요!')
+        .required('몸무게를 선택해주세요!'),
+});
 
 const SignUp_5 = () => {
-    const navigate = useNavigate()
+    const navigate = useNavigate();
+    const { data, updateSignup } = useSignup();
 
-    const schema = yup.object().shape({
-        weight: yup
-            .number()
-            .typeError("숫자를 입력해주세요!")
-            .min(1, "1kg 이상 선택해주세요!")
-            .max(200, "200kg 이하로 선택해주세요!")
-            .required("몸무게를 선택해주세요!")
-    })
+    const defaultWeight = data?.weight ?? 50;
 
-    const { register, handleSubmit, formState: { errors, isValid }, setValue, watch } = useForm({
+    const {
+        register,
+        handleSubmit,
+        formState: { errors, isValid },
+        setValue,
+        watch,
+    } = useForm({
         resolver: yupResolver(schema),
         mode: 'onChange',
         defaultValues: {
-            weight: 50
-        }
-    })
+            weight: defaultWeight,
+        },
+    });
 
-    const currentWeight = Number(watch("weight", 50))
+    // 초기값도 즉시 유효 처리
+    useEffect(() => {
+        setValue('weight', defaultWeight, { shouldValidate: true });
+    }, [defaultWeight, setValue]);
+
+    const currentWeight = Number(watch('weight', defaultWeight));
 
     const increaseWeight = () => {
         if (currentWeight < 200) {
-            setValue("weight", currentWeight + 1, { shouldValidate: true })
+            setValue('weight', currentWeight + 1, { shouldValidate: true });
         }
-    }
+    };
 
     const decreaseWeight = () => {
         if (currentWeight > 1) {
-            setValue("weight", currentWeight - 1, { shouldValidate: true })
+            setValue('weight', currentWeight - 1, { shouldValidate: true });
         }
-    }
+    };
 
-    const onSubmit = (data) => {
-        console.log("몸무게:", data.weight)
-        navigate('/Signup_6')
-    }
+    const onSubmit = (form) => {
+        updateSignup({ weight: Number(form.weight) }); // 공용 상태에 저장
+        navigate('/Signup_6');
+    };
 
     return (
         <>
@@ -69,7 +85,7 @@ const SignUp_5 = () => {
                         </button>
                         <input
                             type="number"
-                            {...register("weight")}
+                            {...register('weight')}
                             value={currentWeight}
                             readOnly
                         />
@@ -92,7 +108,7 @@ const SignUp_5 = () => {
                 </form>
             </div>
         </>
-    )
-}
+    );
+};
 
-export default SignUp_5
+export default SignUp_5;

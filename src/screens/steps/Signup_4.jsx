@@ -1,48 +1,67 @@
-import { useForm } from 'react-hook-form'
-import * as yup from 'yup'
-import { yupResolver } from '@hookform/resolvers/yup'
-import { useNavigate } from 'react-router-dom'
-import "./Signup.css"
-import "./Signup_4.css"
-import left from '../assets/left.png'
-import plus from '../assets/plus.png'
-import minus from '../assets/minus.png'
+import { useForm } from 'react-hook-form';
+import * as yup from 'yup';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
+import { useSignup } from '../../data/SignupData.jsx';
+import '../../styles/Signup.css';
+import '../../styles/Signup_4.css';
+import left from '../../assets/left.png';
+import plus from '../../assets/plus.png';
+import minus from '../../assets/minus.png';
+
+const schema = yup.object().shape({
+    height: yup
+        .number()
+        .typeError('숫자를 입력해주세요!')
+        .min(1, '1cm 이상 선택해주세요!')
+        .max(200, '200cm 이하로 선택해주세요!')
+        .required('키를 선택해주세요!'),
+});
 
 const SignUp_4 = () => {
-    const navigate = useNavigate()
+    const navigate = useNavigate();
+    const { data, updateSignup } = useSignup();
 
-    const schema = yup.object().shape({
-        height: yup
-            .number()
-            .typeError("숫자를 입력해주세요!")
-            .min(1, "1cm 이상 선택해주세요!")
-            .max(200, "200cm 이하로 선택해주세요!")
-            .required("키를 선택해주세요!")
-    })
+    const defaultHeight = data?.height ?? 123;
 
-    const { register, handleSubmit, formState: { errors, isValid }, setValue, watch } = useForm({
+    const {
+        register,
+        handleSubmit,
+        formState: { errors, isValid },
+        setValue,
+        watch,
+    } = useForm({
         resolver: yupResolver(schema),
-        mode: 'onChange'
-    })
+        mode: 'onChange',
+        defaultValues: {
+            height: defaultHeight,
+        },
+    });
 
-    const currentHeight = Number(watch("height", 123))
+    // 기본값으로도 즉시 유효하게 만들고 싶다면 초기 검증 트리거
+    useEffect(() => {
+        setValue('height', defaultHeight, { shouldValidate: true });
+    }, [defaultHeight, setValue]);
+
+    const currentHeight = Number(watch('height', defaultHeight));
 
     const increaseHeight = () => {
         if (currentHeight < 200) {
-            setValue("height", currentHeight + 1, { shouldValidate: true })
+            setValue('height', currentHeight + 1, { shouldValidate: true });
         }
-    }
+    };
 
     const decreaseHeight = () => {
         if (currentHeight > 1) {
-            setValue("height", currentHeight - 1, { shouldValidate: true })
+            setValue('height', currentHeight - 1, { shouldValidate: true });
         }
-    }
+    };
 
-    const onSubmit = (data) => {
-        console.log("키:", data.height)
-        navigate('/Signup_5')
-    }
+    const onSubmit = (form) => {
+        updateSignup({ height: Number(form.height) }); // 공용 상태에 병합 저장
+        navigate('/Signup_5');
+    };
 
     return (
         <>
@@ -66,7 +85,7 @@ const SignUp_4 = () => {
                         </button>
                         <input
                             type="number"
-                            {...register("height")}
+                            {...register('height')}
                             value={currentHeight}
                             readOnly
                         />
@@ -89,7 +108,7 @@ const SignUp_4 = () => {
                 </form>
             </div>
         </>
-    )
-}
+    );
+};
 
-export default SignUp_4
+export default SignUp_4;

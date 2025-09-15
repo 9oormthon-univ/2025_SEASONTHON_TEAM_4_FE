@@ -1,30 +1,39 @@
-import { useForm } from 'react-hook-form'
-import * as yup from 'yup'
-import { yupResolver } from '@hookform/resolvers/yup'
-import { useNavigate } from 'react-router-dom'
-import { useRef} from "react";
-import "./Signup.css"
-import "./Signup_3.css"
-import left from '../assets/left.png'
-import date from '../assets/date.png'
+import { useForm } from 'react-hook-form';
+import * as yup from 'yup';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { useNavigate } from 'react-router-dom';
+import { useRef } from 'react';
+import { useSignup } from '../../data/SignupData.jsx';
+import '../../styles/Signup.css';
+import '../../styles/Signup_3.css';
+import left from '../../assets/left.png';
+import date from '../../assets/date.png';
+
+const schema = yup.object().shape({
+    birth: yup.date().typeError('생일을 선택해주세요!').required('생일을 선택해주세요!'),
+});
 
 const SignUp_3 = () => {
-    const navigate = useNavigate()
-    const dateInputRef = useRef(null)
-
-    const schema = yup.object().shape({
-        birth: yup.date().required('생일을 선택해주세요!')
-    })
+    const navigate = useNavigate();
+    const dateInputRef = useRef(null);
+    const { data, updateSignup } = useSignup();
 
     const { register, handleSubmit, formState: { errors, isValid } } = useForm({
         resolver: yupResolver(schema),
-        mode: 'onChange'
-    })
+        mode: 'onChange',
+        defaultValues: {
+            // HTML date input은 'YYYY-MM-DD' 문자열을 사용
+            birth: data?.birth || '',
+        },
+    });
 
-    const onSubmit = (data) => {
-        console.log('생일:', data.birth)
-        navigate('/Signup_4')
-    }
+    const onSubmit = (form) => {
+        updateSignup({ birth: form.birth }); // 공용 상태에 병합 저장
+        navigate('/Signup_4');
+    };
+
+    // register에서 ref를 분리해 dateInputRef에 같이 연결
+    const { ref: birthRef, ...birthReg } = register('birth');
 
     return (
         <>
@@ -41,10 +50,10 @@ const SignUp_3 = () => {
                     <div className="input-box">
                         <input
                             type="date"
-                            {...register('birth')}
-                            ref={(e) => {
-                                register('birth').ref(e)
-                                dateInputRef.current = e
+                            {...birthReg}
+                            ref={(el) => {
+                                birthRef(el);
+                                dateInputRef.current = el;
                             }}
                             className="date-input"
                         />
@@ -69,7 +78,7 @@ const SignUp_3 = () => {
                 </form>
             </div>
         </>
-    )
-}
+    );
+};
 
-export default SignUp_3
+export default SignUp_3;

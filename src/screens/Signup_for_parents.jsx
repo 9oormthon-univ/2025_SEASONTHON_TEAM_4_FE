@@ -1,8 +1,8 @@
 import { useForm } from 'react-hook-form';
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import "./Signup.css";
-import "./Signup_2.css";
+import "../styles/Signup.css";
+import "../styles/Signup_2.css";
 
 const Signup_for_parents = () => {
     const navigate = useNavigate();
