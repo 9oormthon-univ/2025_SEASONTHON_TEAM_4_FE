@@ -1,3 +1,6 @@
+// tab bar = navigation bar 생성
+// kid home에서는 onHome을 "Home_kid"로, parents home에서는 "Home_parents"로
+
 export default function TabBar({ active = "home", onHome, onQuest, onReport, onMy }) {
     const item = (key, label, icon, onClick) => {
         const isActive = active === key;
