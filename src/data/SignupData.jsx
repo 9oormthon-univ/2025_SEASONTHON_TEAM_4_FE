@@ -4,7 +4,7 @@ const initial = {
     email: "", password: "",
     name: "", gender: "",
     birth: "", height: null, weight: null,
-    status: "", sensor: "", inviteCode: ""
+    status: "", sensor: ""
 };
 
 function reducer(state, action) {
@@ -36,7 +36,7 @@ export function SignupProvider({ children }) {
         updateSignup: (payload) => dispatch({ type: "UPDATE", payload }),
         resetSignup: () => dispatch({ type: "RESET" }),
         submitSignup: async () => {
-            const res = await fetch("/api/signup", {
+            const res = await fetch("/api/users/signup", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(state),

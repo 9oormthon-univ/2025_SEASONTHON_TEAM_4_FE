@@ -13,7 +13,11 @@ import Signup_5 from "./screens/steps/Signup_5.jsx";
 import Signup_6 from "./screens/steps/Signup_6.jsx";
 import Signup_7 from "./screens/steps/Signup_7.jsx";
 import Signup_success from "./screens/Signup_success.jsx";
-import Home from "./screens/Home.jsx";
+import KidHomePage from "./screens/kid/Home_kid.jsx";
+import ParentsHomePage from "./screens/parents/Home_parents.jsx";
+import QuestPage from "./screens/kid/QuestPage.jsx";
+import QuestOnePage from "./screens/kid/QuestOnePage.jsx";
+import ReportPage from "./screens/parents/ReportPage.jsx";
 
 export default function App() {
     return (
@@ -32,7 +36,11 @@ export default function App() {
                     <Route path="/login" element={<Login/>} />
                     <Route path="/signup_for_parents" element={<Signup_for_parents />} />
                     <Route path="/signup_success" element={<Signup_success />} />
-                    <Route path="/Home" element={<Home />} />
+                    <Route path="/Home_kid" element={<KidHomePage />} />
+                    <Route path="/Home_parents" element={<ParentsHomePage />} />
+                    <Route path="/quest" element={<QuestPage />} />
+                    <Route path="/quest-1" element={<QuestOnePage />} />
+                    <Route path="/report" element={<ReportPage />} />
                 </Routes>
             </SignupProvider>
         </Router>

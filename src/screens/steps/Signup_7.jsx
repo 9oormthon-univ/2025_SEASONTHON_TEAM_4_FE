@@ -54,7 +54,7 @@ const SignUp_7 = () => {
             // 최종 payload: 지금까지 모은 모든 값 + 센서 코드
             const payload = { ...data, sensor: code };
 
-            const res = await fetch('/api/signup', {
+            const res = await fetch('/api/users/signup', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(payload)

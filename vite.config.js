@@ -6,10 +6,8 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': {
-        target: 'http://localhost:4000',
+        target: 'http://localhost:8080',
         changeOrigin: true,
-        // 백엔드 라우트가 /api/signup이면 rewrite 불필요
-        // rewrite: (path) => path.replace(/^\/api/, '')  // 백엔드가 /signup이면 주석 해제
       }
     }
   }
