@@ -1,6 +1,6 @@
-// src/pages/QuestOnePage.jsx
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import water from "../../assets/water.png"
 
 export default function QuestOnePage() {
     const navigate = useNavigate();
@@ -51,7 +51,7 @@ export default function QuestOnePage() {
                 {/* 캐릭터 */}
                 <div className="mb-8">
                     <img
-                        src="/danjjak3.png"
+                        src={water}
                         alt="단짝 캐릭터"
                         width={200}
                         height={200}

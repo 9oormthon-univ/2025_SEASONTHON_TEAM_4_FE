@@ -1,9 +1,19 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
+import TabBar from "../../components/TabBar.jsx";
+import danger from "../../assets/danger.png"
+import icon from "../../assets/icon.png"
 
 export default function QuestPage() {
     const [selectedDate, setSelectedDate] = useState(new Date());
     const navigate = useNavigate();
+    const { pathname } = useLocation();
+
+    const active =
+        pathname.startsWith("/home") ? "home" :
+            pathname.startsWith("/report") ? "report" :
+                pathname.startsWith("/my") ? "my" :
+                    "quest";
 
     const handleNext = () => {
         navigate("/quest-1");
@@ -131,7 +141,7 @@ export default function QuestPage() {
                 {/* 캐릭터 */}
                 <div className="mb-8">
                     <img
-                        src="/danjjak1.png"
+                        src={danger}
                         alt="단짝 캐릭터"
                         width={200}
                         height={200}
@@ -146,7 +156,7 @@ export default function QuestPage() {
                         <div className="w-20 h-20 bg-white rounded-full border-2 border-solid border-teal-400 flex items-center justify-center relative">
                             <div className="w-16 h-16 rounded-full border-2 border-dashed border-teal-400 flex items-center justify-center">
                                 <img
-                                    src="/danjjak2.png"
+                                    src={icon}
                                     alt="단짝 캐릭터"
                                     width={40}
                                     height={40}
@@ -167,7 +177,8 @@ export default function QuestPage() {
                         <div className="w-20 h-20 bg-white rounded-full border-2 border-solid border-teal-400 flex items-center justify-center relative">
                             <div className="w-16 h-16 rounded-full border-2 border-dashed border-teal-400 flex items-center justify-center">
                                 <img
-                                    src="/danjjak2.png"
+                                    src=
+                                        {icon}
                                     alt="단짝 캐릭터"
                                     width={40}
                                     height={40}
@@ -205,49 +216,13 @@ export default function QuestPage() {
             </button>
 
             {/* 바텀 네비게이션 */}
-            <div className="bg-white border-t border-gray-200 px-6 py-2">
-                <div className="flex justify-around items-center">
-                    <button
-                        onClick={() => navigate("/kid")}
-                        className="flex flex-col items-center py-2 px-4"
-                        type="button"
-                    >
-                        <div className="w-6 h-6 mb-1">
-                            <svg className="w-full h-full text-gray-400" fill="currentColor" viewBox="0 0 24 24">
-                                <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
-                            </svg>
-                        </div>
-                        <span className="text-xs text-gray-400">홈</span>
-                    </button>
-
-                    <button className="flex flex-col items-center py-2 px-4" type="button">
-                        <div className="w-6 h-6 mb-1">
-                            <svg className="w-full h-full text-teal-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                            </svg>
-                        </div>
-                        <span className="text-xs text-teal-500 font-medium">퀘스트</span>
-                    </button>
-
-                    <button className="flex flex-col items-center py-2 px-4" type="button">
-                        <div className="w-6 h-6 mb-1">
-                            <svg className="w-full h-full text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
-                            </svg>
-                        </div>
-                        <span className="text-xs text-gray-400">리포트</span>
-                    </button>
-
-                    <button className="flex flex-col items-center py-2 px-4" type="button">
-                        <div className="w-6 h-6 mb-1">
-                            <svg className="w-full h-full text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                            </svg>
-                        </div>
-                        <span className="text-xs text-gray-400">마이</span>
-                    </button>
-                </div>
-            </div>
+            <TabBar
+                active={active}
+                onHome={() => navigate("/Home_kid")}
+                onQuest={() => navigate("/quest")}
+                onReport={() => navigate("/report")}
+                onMy={() => navigate("/my")}
+            />
         </div>
     );
 }
