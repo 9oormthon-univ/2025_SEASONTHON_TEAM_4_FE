@@ -10,3 +10,43 @@
     height: 20px;
     cursor: pointer;
 }
+
+.date-split {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    justify-content: center;
+    margin-top: 12px;
+}
+
+.date-field {
+    display: inline-flex;
+    align-items: center;
+    outline: none;
+    border: none;
+}
+
+.date-field input {
+    width: 90px;
+    padding: 12px 14px;
+    font-size: 16px;
+    line-height: 1;
+    text-align: center;
+    outline: none;
+    border: none;
+}
+
+.date-field input::placeholder { color: #9ca3af; }
+.date-field input:focus { border-color: #00bba9;
+                          box-shadow: 0 0 0 3px #00bba933;
+                          border-radius: 6px;}
+
+.date-field .sep {
+    display: inline-block;
+    width: 16px;
+    text-align: center;
+    color: #9ca3af;
+    font-weight: 600;
+    margin: 0 6px;
+    color: #333333;
+}
