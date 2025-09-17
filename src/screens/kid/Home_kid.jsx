@@ -1,6 +1,6 @@
-import {useLocation, useNavigate} from "react-router-dom";
+import { DotLottieReact } from '@lottiefiles/dotlottie-react';
 import { useState } from "react";
-import happy from "../../assets/happy.png";
+import { useLocation, useNavigate } from "react-router-dom";
 import TabBar from "../../components/TabBar.jsx";
 
 export default function KidHomePage() {
@@ -62,7 +62,6 @@ export default function KidHomePage() {
                     {weekDates.map((date, index) => {
                         const { day, dayName } = formatDate(date);
                         const isSelected = isSameDate(date, selectedDate);
-                        const isToday = isSameDate(date, new Date());
 
                         return (
                             <button
@@ -97,12 +96,10 @@ export default function KidHomePage() {
 
                 {/* 캐릭터 */}
                 <div className="mb-8">
-                    <img
-                        src={happy}
-                        alt="단짝 캐릭터"
-                        width={200}
-                        height={200}
-                        className="object-contain"
+                    <DotLottieReact
+                        src="https://lottie.host/5dc58b0f-f353-4952-9304-c506e85d5441/svt4OB3D4V.lottie"
+                        loop
+                        autoplay
                     />
                 </div>
 

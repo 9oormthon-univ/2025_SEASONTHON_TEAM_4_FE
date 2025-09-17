@@ -5,30 +5,30 @@ import { useCallback, useRef } from 'react';
 const Graph = ({ data = [], minThreshold = 80, maxThreshold = 130 }) => {
     const chartRef = useRef(null);
     const sampleData = [
-        { t: '09:00', value: 75 },
-        { t: '09:05', value: 82 },
-        { t: '09:10', value: 95 },
-        { t: '09:15', value: 110 },
-        { t: '09:20', value: 125 },
-        { t: '09:25', value: 135 },
-        { t: '09:30', value: 145 },
-        { t: '09:35', value: 140 },
-        { t: '09:40', value: 128 },
-        { t: '09:45', value: 115 },
-        { t: '09:50', value: 105 },
-        { t: '09:55', value: 90 },
-        { t: '10:00', value: 78 },
-        { t: '10:05', value: 85 },
-        { t: '10:10', value: 120 },
-        { t: '10:15', value: 132 },
-        { t: '10:20', value: 150 },
-        { t: '10:25', value: 165 },
-        { t: '10:30', value: 155 },
-        { t: '10:35', value: 138 },
-        { t: '10:40', value: 122 },
-        { t: '10:45', value: 98 },
-        { t: '10:50', value: 72 },
-        { t: '10:55', value: 88 }
+        { t: '9시', value: 75 },
+        { t: '9시 5분', value: 82 },
+        { t: '9시 10분', value: 95 },
+        { t: '9시 15분', value: 110 },
+        { t: '9시 20분', value: 125 },
+        { t: '9시 25분', value: 135 },
+        { t: '9시 30분', value: 145 },
+        { t: '9시 35분', value: 140 },
+        { t: '9시 40분', value: 128 },
+        { t: '9시 45분', value: 115 },
+        { t: '9시 50분', value: 105 },
+        { t: '9시 55분', value: 90 },
+        { t: '10시', value: 78 },
+        { t: '10시 5분', value: 85 },
+        { t: '10시 10분', value: 120 },
+        { t: '10시 15분', value: 132 },
+        { t: '10시 20분', value: 150 },
+        { t: '10시 25분', value: 165 },
+        { t: '10시 30분', value: 155 },
+        { t: '10시 35분', value: 138 },
+        { t: '10시 40분', value: 122 },
+        { t: '10시 45분', value: 98 },
+        { t: '10시 50분', value: 72 },
+        { t: '10시 55분', value: 88 }
     ];
 
     const chartData = data.length > 0 ? data : sampleData;
@@ -43,10 +43,10 @@ const Graph = ({ data = [], minThreshold = 80, maxThreshold = 130 }) => {
     const getColorForValue = (value) => {
         if (value >= minThreshold && value <= maxThreshold) {
             // 정상 범위 (80-130): 파란색 계열
-            return '#7BB7FF';
+            return '#00BBA9';
         } else {
             // 비정상 범위: 주황색 계열
-            return '#FDA296';
+            return '#C23E2B';
         }
     };
 
@@ -58,9 +58,9 @@ const Graph = ({ data = [], minThreshold = 80, maxThreshold = 130 }) => {
             let color;
 
             if (item.value >= minThreshold && item.value <= maxThreshold) {
-                color = '#7BB7FF';
+                color = '#00BBA9';
             } else {
-                color = '#FDA296';
+                color = '#C23E2B';
             }
 
             colorStops.push({ offset, color });
@@ -75,7 +75,7 @@ const Graph = ({ data = [], minThreshold = 80, maxThreshold = 130 }) => {
                     const midOffset = (offset + (index + 1) / (visibleData.length - 1)) / 2;
                     colorStops.push({
                         offset: midOffset,
-                        color: '#B8A9FF' // 보라색 전환색
+                        color: '#FDA296' // 보라색 전환색
                     });
                 }
             }
@@ -130,14 +130,22 @@ const Graph = ({ data = [], minThreshold = 80, maxThreshold = 130 }) => {
             type: 'category',
             data: chartData.map(d => d.t),
             axisLine: { show: false },
-            animation: false
+            animation: false,
+            axisLabel: {
+                fontFamily: 'Pretendard Variable, Pretendard, sans-serif',
+                color: '#8E8E8E'
+            }
         },
         yAxis: {
             type: 'value',
             min: Math.max(0, minValue - padding),
             max: maxValue + padding,
             splitLine: { show: false },
-            animation: false
+            animation: false,
+            axisLabel: {
+                fontFamily: 'Pretendard Variable, Pretendard, sans-serif',
+                color: '#8E8E8E'
+            }
         },
         series: [
             {
@@ -168,7 +176,7 @@ const Graph = ({ data = [], minThreshold = 80, maxThreshold = 130 }) => {
                             {
                                 yAxis: minThreshold,
                                 itemStyle: {
-                                    color: 'rgba(123, 183, 255, 0.08)'
+                                    color: 'rgba(0, 187, 169, 0.1)'
                                 }
                             },
                             {

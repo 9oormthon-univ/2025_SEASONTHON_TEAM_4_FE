@@ -1,15 +1,16 @@
+import { useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useMemo, useState } from "react";
-import Chart from "../../components/charts/Chart";
 import arrowDown from "../../assets/arrow-down.png";
 import refreshIcon from "../../assets/refresh.png";
+import Chart from "../../components/charts/Chart";
 
 // 탭바를 분리했지만, 한 파일에 같이 두고 싶으면 아래 컴포넌트를 같은 파일 최하단에 둬도 OK
 import TabBar from "../../components/TabBar";
 
 export default function ParentHomePage({ userName = "부모님", score = 97 }) {
     const navigate = useNavigate();
-    const [selectedDate, setSelectedDate] = useState(new Date());
+    const [selectedDate] = useState(new Date());
+    const [currentTime, setCurrentTime] = useState(new Date());
 
     const currentMonthLabel = useMemo(() => {
         // 예: '9월'
@@ -17,14 +18,39 @@ export default function ParentHomePage({ userName = "부모님", score = 97 }) {
     }, [selectedDate]);
 
     const weekDays = useMemo(
-        () => ["월", "화", "수", "목", "금", "토", "일"],
+        () => ["월", "화", "수", "목", "금", "토"],
         []
     );
+
+    // 현재 주의 날짜들 계산
+    const weekDates = useMemo(() => {
+        const today = new Date();
+        const currentDay = today.getDay(); // 0: 일요일, 1: 월요일, ...
+        const mondayOffset = currentDay === 0 ? -6 : 1 - currentDay; // 월요일까지의 오프셋
+        
+        return weekDays.map((_, index) => {
+            const date = new Date(today);
+            date.setDate(today.getDate() + mondayOffset + index);
+            return date.getDate();
+        });
+    }, [weekDays]);
+
+    // 오늘 날짜 확인
+    const todayDate = new Date().getDate();
 
     const goMonthCalendar = () => {
         // 필요에 맞게 라우팅 경로 조정
         navigate(`/calendar?month=${selectedDate.getFullYear()}-${selectedDate.getMonth() + 1}`);
     };
+
+    // 실시간 시간 업데이트
+    useEffect(() => {
+        const timer = setInterval(() => {
+            setCurrentTime(new Date());
+        }, 1000);
+
+        return () => clearInterval(timer);
+    }, []);
 
     const handleUpdate = () => {
         // 새로고침/리패치 자리. 일단 하드 리로드 예시:
@@ -33,80 +59,209 @@ export default function ParentHomePage({ userName = "부모님", score = 97 }) {
     };
 
     return (
-        <div className="min-h-screen bg-white flex flex-col">
-            {/* 타이틀바: '9월' + arrow-down.png */}
-            <div className="pt-safe-top px-6 py-4 bg-white">
+        <div className="h-screen bg-white flex flex-col">
+            <div className="pt-safe-top mt-4 px-6 py-4 bg-white">
                 <button
                     onClick={goMonthCalendar}
-                    className="mx-auto flex items-center justify-center"
+                    className="mx-auto flex items-center justify-center gap-1"
                     aria-label="열린 달력으로 이동"
                 >
                     <h1 className="text-xl font-bold text-black">{currentMonthLabel}</h1>
-                    <img
-                        src={arrowDown}
-                        alt="arrow-down"
-                        className="w-5 h-5 ml-2 opacity-70"
-                    />
+                    <div className="w-5 h-5 ml-2 bg-[#EEEEEE] rounded-full flex items-center justify-center">
+                        <img
+                            src={arrowDown}
+                            alt="arrow-down"
+                            className="w-3 h-3"
+                        />
+                    </div>
                 </button>
             </div>
 
             {/* 요일 버튼 (월~일) */}
             <div className="px-6 py-3 bg-white">
                 <div className="flex items-center justify-between">
-                    {weekDays.map((d, i) => (
-                        <button
-                            key={i}
-                            className="text-sm font-medium text-gray-600 hover:text-black px-2 py-2 rounded-full hover:bg-gray-100 transition-colors"
-                            onClick={() => {
-                                // 필요시 해당 요일로 selectedDate 이동 로직 연결
-                            }}
-                        >
-                            {d}
-                        </button>
-                    ))}
+                    {weekDays.map((d, i) => {
+                        const isToday = weekDates[i] === todayDate;
+                        return (
+                            <button
+                                key={i}
+                                className={`flex flex-col gap-4 items-center justify-center rounded-full w-12 p-4 transition-colors ${
+                                    isToday 
+                                        ? 'bg-[#00BBA9] hover:bg-[#009688]' 
+                                        : 'bg-[#F5F5F5] hover:bg-gray-300'
+                                }`}
+                                onClick={() => {
+                                    // 필요시 해당 요일로 selectedDate 이동 로직 연결
+                                }}
+                            >
+                                <span className={`text-md font-medium mb-1 ${
+                                    isToday ? 'text-white' : 'text-gray-600'
+                                }`}>
+                                    {d}
+                                </span>
+                                <span className={`text-md font-bold ${
+                                    isToday ? 'text-white' : 'text-black'
+                                }`}>
+                                    {weekDates[i]}
+                                </span>
+                            </button>
+                        );
+                    })}
                 </div>
             </div>
 
             {/* 메인 컨텐츠 */}
-            <div className="flex-1 flex flex-col px-6 pt-4 rounded-t-3xl">
-                {/* 타이틀 박스: 혈당지수 + 업데이트 */}
-                <div className="bg-slate-700 rounded-2xl p-6 text-white mb-4">
-                    <div className="flex items-center justify-between">
-                        <h3 className="text-lg font-medium">
-                            {userName}님의 혈당지수는?
-                        </h3>
-                        <button
-                            onClick={handleUpdate}
-                            className="flex items-center gap-1 bg-white/20 text-[#e5e5e5] px-3 py-1 rounded-full text-sm hover:bg-white/30 transition-colors"
-                        >
-                            업데이트
-                            <img src={refreshIcon} alt="refresh" className="w-4 h-4" />
-                        </button>
+            <div className="flex-1 overflow-y-auto pb-20">
+                <div className="px-6 pt-4 rounded-[20px]">
+                    {/* 타이틀 박스: 혈당지수 + 업데이트 */}
+                    <div className="bg-[#1B3759] rounded-2xl p-6 text-white mb-4">
+                        <div className="flex items-center justify-between">
+                            <h3 className="text-lg font-medium">
+                                이단짝님의 혈당건강지수는?
+                            </h3>
+                            
+                            <div className="flex items-center gap-2">
+                                <span className="text-[#CACACA] text-lg">
+                                    {currentTime.toLocaleTimeString('ko-KR', { 
+                                        hour: '2-digit', 
+                                        minute: '2-digit',
+                                        hour12: false 
+                                    })}
+                                </span>
+                                <button
+                                    onClick={handleUpdate}
+                                    className="flex items-center gap-1 text-[#CACACA] py-1 rounded-full text-lg hover:bg-white/30 transition-colors"
+                                >
+                                    <img src={refreshIcon} alt="refresh" className="w-5 h-5" />
+                                </button>
+                            </div>
+                        </div>
+                        <div className="mt-2 text-4xl font-bold">
+                            {score}
+                            <span className="text-xl font-normal">점</span>
+                        </div>
                     </div>
-                    <div className="mt-2 text-4xl font-bold">
-                        {score}
-                        <span className="text-xl font-normal">점</span>
+
+                    {/* 차트 */}
+                    <div className="mb-4">
+                        <Chart />
                     </div>
                 </div>
 
-                {/* 차트 */}
-                <div className="mb-4">
-                    <Chart />
-                </div>
+                <div className="bg-[#F7F8FA] rounded-t-2xl p-4 border-t border-gray-200">
+                     {/* 간단 보고서 */}
+                     <div className="bg-white rounded-2xl p-4">
+                         <h3 className="text-black text-lg font-medium my-4 text-center">오늘은 혈당이 전반적으로 안정적이에요!</h3>
+                         <div className="flex gap-4 mb-4 mx-2">
+                            <div className="flex-1 px-3 py-4 border border-gray-200 rounded-lg text-center">
+                                현재수치 <span className="font-bold">57</span><span className="text-gray-500">mg/dL</span>
+                            </div>
+                            <div className="flex-1 px-3 py-4 border border-gray-200 rounded-lg text-center">
+                                평균혈당 <span className="font-bold">57</span><span className="text-gray-500">mg/dL</span>
+                            </div>
+                         </div>
+                         <div className="grid grid-cols-3 gap-2 mb-2">
+                             <div className="bg-[#386dae19] rounded-2xl mx-2 px-1 py-4 shadow-sm text-center border border-gray-200">
+                                 <h3 className="text-black text-md font-medium mb-4">{"최저혈당 >"}</h3>
+                                 <p className="text-2xl font-bold text-black">
+                                     82 <span className="text-xs font-normal text-gray-500">mg/dL</span>
+                                 </p>
+                             </div>
+                             <div className="bg-[#00BBA919] rounded-2xl mx-2 px-1 py-4 shadow-sm text-center border border-gray-200">
+                                 <h3 className="text-[#00BBA9] text-md font-medium mb-4">{"스파이크 >"}</h3>
+                                 <p className="text-2xl font-bold text-black">
+                                     2회 <span className="text-xs font-normal text-gray-500">/3회</span>
+                                 </p>
+                             </div>
+                             <div className="bg-[#F66D5619] rounded-2xl mx-2 px-1 py-4 shadow-sm text-center border border-gray-200">
+                                 <h3 className="text-[#F66D56] text-md font-medium mb-4">{"최고혈당 >"}</h3>
+                                 <p className="text-2xl font-bold text-black">
+                                     105 <span className="text-xs font-normal text-gray-500">mg/dL</span>
+                                 </p>
+                             </div>
+                         </div>
+                     </div>
 
-                {/* 최저/최고 카드 (원하면 유지/삭제) */}
-                <div className="grid grid-cols-2 gap-4 mb-2">
-                    <div className="bg-white rounded-2xl p-4 shadow-sm">
-                        <h3 className="text-gray-600 text-sm mb-1">최저 혈당</h3>
-                        <p className="text-2xl font-bold text-black">
-                            82 <span className="text-base text-gray-500">mg/dL</span>
-                        </p>
+                    {/* 오늘의 돌봄 힌트 */}
+                    <div className="bg-white rounded-2xl mt-4 py-8 px-6">
+                        <h3 className="text-black text-lg font-medium mb-4">오늘의 돌봄 힌트</h3>
+                        
+                        <div className="space-y-4">
+                            <div className="flex items-start justify-between">
+                                <div className="flex-1">
+                                    <h4 className="text-black text-md font-medium mb-1">오늘 하루 퀘스트 완료</h4>
+                                    <p className="text-gray-600 text-sm">아이에게 칭찬 한마디 해주세요.</p>
+                                </div>
+                                <div className="ml-4">
+                                    <div className="w-6 h-6 bg-[#00BBA9] rounded-[5px] flex items-center justify-center">
+                                        <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
+                                            <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                                        </svg>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div className="h-px bg-gray-200 my-4"></div>
+                            <div className="flex items-start justify-between">
+                                <div className="flex-1">
+                                    <h4 className="text-black text-md font-medium mb-1">점심 뒤에 혈당이 조금 상승</h4>
+                                    <p className="text-gray-600 text-sm">내일은 반찬에 단백질을 조금 더 넣어주시면 좋아요.</p>
+                                </div>
+                                <div className="ml-4">
+                                    <div className="w-6 h-6 bg-gray-200 rounded-[5px] flex items-center justify-center">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div className="bg-white rounded-2xl p-4 shadow-sm">
-                        <h3 className="text-gray-600 text-sm mb-1">최고 혈당</h3>
-                        <p className="text-2xl font-bold text-black">
-                            127 <span className="text-base text-gray-500">mg/dL</span>
-                        </p>
+
+                    {/* 이단짝의 기록 */}
+                    <div className="bg-white rounded-2xl mt-4 py-8 px-6">
+                        <h3 className="text-black text-lg font-medium mb-6">이단짝의 기록</h3>
+                        
+                        <div className="space-y-4">
+                            <div className="flex items-center">
+                                <div className="w-16 h-16 bg-gray-200 rounded-lg flex items-center justify-center mr-4">
+                                    <svg className="w-8 h-8 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fillRule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clipRule="evenodd" />
+                                    </svg>
+                                </div>
+                                <div className="flex-1">
+                                    <div className="flex items-center mb-1">
+                                        <span className="bg-[#00BBA9] text-white text-xs px-2 py-1 rounded-md mr-2">운동</span>
+                                        <span className="text-black font-medium">새벽볔 러닝</span>
+                                    </div>
+                                    <p className="text-gray-600 text-sm">2시간 15분 · 격하게</p>
+                                </div>
+                                <div className="ml-4">
+                                    <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                                    </svg>
+                                </div>
+                            </div>
+
+                            <div className="h-px bg-gray-200"></div>
+
+                            <div className="flex items-center">
+                                <div className="w-16 h-16 bg-gray-200 rounded-lg flex items-center justify-center mr-4">
+                                    <svg className="w-8 h-8 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fillRule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clipRule="evenodd" />
+                                    </svg>
+                                </div>
+                                <div className="flex-1">
+                                    <div className="flex items-center mb-1">
+                                        <span className="bg-[#F66D56] text-white text-xs px-2 py-1 rounded-md mr-2">식단</span>
+                                        <span className="text-black font-medium">김치찌개, 밥, 계란말이</span>
+                                    </div>
+                                    <p className="text-gray-600 text-sm">300kcal</p>
+                                </div>
+                                <div className="ml-4">
+                                    <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

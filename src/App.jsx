@@ -1,9 +1,15 @@
 import React from "react";
-import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
-import InitialOnboarding from "./screens/InitialOnboarding";
+import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import { SignupProvider } from "./data/SignupData.jsx";
+import InitialOnboarding from "./screens/InitialOnboarding";
 import Login from "./screens/Login.jsx";
 import Signup_for_parents from "./screens/Signup_for_parents.jsx";
+import Signup_success from "./screens/Signup_success.jsx";
+import KidHomePage from "./screens/kid/Home_kid.jsx";
+import QuestOnePage from "./screens/kid/QuestOnePage.jsx";
+import QuestPage from "./screens/kid/QuestPage.jsx";
+import ParentsHomePage from "./screens/parents/Home_parents.jsx";
+import ReportPage from "./screens/parents/ReportPage.jsx";
 import Signup_0 from "./screens/steps/Signup_0.jsx";
 import Signup_1 from "./screens/steps/Signup_1.jsx";
 import SignUp_2 from "./screens/steps/Signup_2.jsx";
@@ -12,12 +18,6 @@ import Signup_4 from "./screens/steps/Signup_4.jsx";
 import Signup_5 from "./screens/steps/Signup_5.jsx";
 import Signup_6 from "./screens/steps/Signup_6.jsx";
 import Signup_7 from "./screens/steps/Signup_7.jsx";
-import Signup_success from "./screens/Signup_success.jsx";
-import KidHomePage from "./screens/kid/Home_kid.jsx";
-import ParentsHomePage from "./screens/parents/Home_parents.jsx";
-import QuestPage from "./screens/kid/QuestPage.jsx";
-import QuestOnePage from "./screens/kid/QuestOnePage.jsx";
-import ReportPage from "./screens/parents/ReportPage.jsx";
 
 export default function App() {
     return (
