@@ -108,7 +108,7 @@ export default function My() {
                 active={active}
                 onHome={() => navigate("/Home_kid")}
                 onQuest={() => navigate("/quest")}
-                onReport={() => navigate("/report")}
+                onReport={() => navigate("/report_kid")}
                 onMy={() => navigate("/my")}
             />
         </div>

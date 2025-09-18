@@ -104,7 +104,7 @@ export default function Quest_detail() {
                 active="quest"
                 onHome={() => navigate("/Home_parents")}
                 onQuest={() => navigate("/quest_parents")}
-                onReport={() => navigate("/report")}
+                onReport={() => navigate("/parents_report")}
                 onMy={() => navigate("/my")}
             />
         </div>

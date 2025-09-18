@@ -134,7 +134,7 @@ export default function Report_kid() {
                 active={active}
                 onHome={() => navigate("/Home_kid")}
                 onQuest={() => navigate("/quest")}
-                onReport={() => navigate("/report")}
+                onReport={() => navigate("/report_kid")}
                 onMy={() => navigate("/my")}
             />
         </div>

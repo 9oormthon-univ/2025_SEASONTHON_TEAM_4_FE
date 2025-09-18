@@ -240,7 +240,7 @@ export default function Report_parents() {
                     active={active}
                     onHome={() => navigate("/Home_parents")}
                     onQuest={() => navigate("/quest_parents")}
-                    onReport={() => navigate("/report_parents")}
+                    onReport={() => navigate("/parents_report")}
                     onMy={() => navigate("/my")}
                 />
                 {/* TabBar 어둡게 하는 오버레이 */}

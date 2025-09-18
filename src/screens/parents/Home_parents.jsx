@@ -124,7 +124,10 @@ export default function ParentHomePage({ score = 97 }) {
             <div className="flex-1 overflow-y-auto pb-20">
                 <div className="px-6 pt-4 rounded-[20px]">
                     {/* 타이틀 박스: 혈당지수 + 업데이트 */}
-                    <div className="bg-[#1B3759] rounded-2xl p-6 text-white mb-4">
+                    <div 
+                        onClick={() => navigate('/report')}
+                        className="bg-[#1B3759] rounded-2xl p-6 text-white mb-4 cursor-pointer hover:bg-[#1e3d64] transition-colors"
+                    >
                         <div className="flex items-center justify-between">
                             <h3 className="text-lg font-medium">
                                 이단짝님의 혈당건강지수는?
@@ -139,7 +142,10 @@ export default function ParentHomePage({ score = 97 }) {
                                     })}
                                 </span>
                                 <button
-                                    onClick={handleUpdate}
+                                    onClick={(e) => {
+                                        e.stopPropagation();
+                                        handleUpdate();
+                                    }}
                                     className="flex items-center gap-1 text-[#CACACA] py-1 rounded-full text-lg hover:bg-white/30 transition-colors"
                                 >
                                     <img src={refreshIcon} alt="refresh" className="w-5 h-5" />

@@ -7,8 +7,6 @@ import Chart from "../../components/charts/Chart";
 
 export default function ReportPage({ score = 97 }) {
     const navigate = useNavigate();
-    const [analyzeData, setAnalyzeData] = useState(null);
-    const [loading, setLoading] = useState(true);
     const [currentTime, setCurrentTime] = useState(new Date());
 
     // 하단 리포트 카드 (for CheckPint)
