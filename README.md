@@ -3,7 +3,7 @@
 아이와 보호자가 함께 쓰는 혈당 생활 코치.  
 식사/활동 퀘스트, 혈당 예측 카드, 리포트로 ‘하루 혈당 루틴’을 쉽게 만들어요.
 
-<img src=
+<img src="public/frame.png" alt="단짝이 대표사진" height="100" />
 
 ## 1) 핵심 기술 스택
 - **FE**: React 18, Vite, React Router, Tailwind CSS, Recharts, react-hook-form + Yup, Lottie
