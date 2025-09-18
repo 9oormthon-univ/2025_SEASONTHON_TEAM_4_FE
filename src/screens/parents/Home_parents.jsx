@@ -7,10 +7,20 @@ import Chart from "../../components/charts/Chart";
 // 탭바를 분리했지만, 한 파일에 같이 두고 싶으면 아래 컴포넌트를 같은 파일 최하단에 둬도 OK
 import TabBar from "../../components/TabBar";
 
-export default function ParentHomePage({ userName = "부모님", score = 97 }) {
+export default function ParentHomePage({ score = 97 }) {
     const navigate = useNavigate();
     const [selectedDate] = useState(new Date());
     const [currentTime, setCurrentTime] = useState(new Date());
+    const [isFloatingMenuOpen, setIsFloatingMenuOpen] = useState(false);
+
+    // 플로팅 메뉴 액션 버튼들
+    const floatingActions = [
+        { id: 1, label: "운동 기록", icon: "🔥", color: "bg-[#FF6B6B]" },
+        { id: 2, label: "혈당 기록", icon: "💧", color: "bg-[#00BBA9]" },
+        { id: 3, label: "체중 기록", icon: "💬", color: "bg-[#FF6B6B]" },
+        { id: 4, label: "메모 하기", icon: "📝", color: "bg-[#00BBA9]" },
+        { id: 5, label: "음식기록", icon: "🍽️", color: "bg-[#FF6B6B]" }
+    ];
 
     const currentMonthLabel = useMemo(() => {
         // 예: '9월'
@@ -266,24 +276,72 @@ export default function ParentHomePage({ userName = "부모님", score = 97 }) {
                 </div>
             </div>
 
-            {/* 플로팅 추가버튼 (원하면 유지) */}
-            <button
-                className="fixed bottom-24 right-6 w-14 h-14 bg-slate-700 rounded-full flex items-center justify-center shadow-lg"
-                aria-label="추가"
-            >
-                <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
-                </svg>
-            </button>
+            {/* 배경 블러 오버레이 */}
+            {isFloatingMenuOpen && (
+                <div 
+                    className="fixed inset-0 bg-black/50 z-40"
+                    onClick={() => setIsFloatingMenuOpen(false)}
+                />
+            )}
+
+            {/* 플로팅 액션 버튼들 */}
+            <div className="fixed bottom-24 right-6 z-50">
+                {/* 서브 액션 버튼들 */}
+                {isFloatingMenuOpen && (
+                    <div className="absolute bottom-16 right-0 space-y-5 pb-2">
+                        {floatingActions.map((action) => (
+                            <div
+                                key={action.id}
+                                className={`flex items-center transition-all duration-300 ease-out ${
+                                    isFloatingMenuOpen 
+                                        ? `translate-y-0 opacity-100` 
+                                        : `translate-y-4 opacity-0`
+                                }`}
+                            >
+                                <span className="bg-white text-gray-800 px-3 py-2 rounded-lg text-sm font-medium mr-3 shadow-lg whitespace-nowrap">
+                                    {action.label}
+                                </span>
+                                <button
+                                    className={`w-12 h-12 ${action.color} rounded-full flex items-center justify-center shadow-lg`}
+                                    onClick={() => {
+                                        setIsFloatingMenuOpen(false);
+                                        navigate('/note');
+                                    }}
+                                >
+                                    <span className="text-xl">{action.icon}</span>
+                                </button>
+                            </div>
+                        ))}
+                    </div>
+                )}
+
+                {/* 메인 플로팅 버튼 */}
+                <button
+                    className={`w-14 h-14 bg-[#2C3E50] rounded-full flex items-center justify-center shadow-lg transition-transform duration-300 ${
+                        isFloatingMenuOpen ? 'rotate-45' : 'rotate-0'
+                    }`}
+                    onClick={() => setIsFloatingMenuOpen(!isFloatingMenuOpen)}
+                >
+                    <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
+                    </svg>
+                </button>
+            </div>
 
             {/* 탭바 */}
-            <TabBar
-                active="home"
-                onHome={() => navigate("/")}
-                onQuest={() => navigate("/quest")}
-                onReport={() => navigate("/parent/report")}
-                onMy={() => navigate("/my")}
-            />
+            <div className="relative">
+                <TabBar
+                    active="home"
+                    onHome={() => navigate("/")}
+                    onQuest={() => navigate("/quest_parents")}
+                    onReport={() => navigate("/parents_report")}
+                    onMy={() => navigate("/my")}
+                />
+                {/* TabBar 어둡게 하는 오버레이 */}
+                {isFloatingMenuOpen && (
+                    <div className="absolute inset-0 bg-black/40 transition-opacity duration-300" />
+                )}
+            </div>
         </div>
     );
 }

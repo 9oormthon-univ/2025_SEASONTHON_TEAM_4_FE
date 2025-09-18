@@ -1,14 +1,14 @@
 .gender-grid {
     display: grid;
-    grid-template-columns: repeat(2, 167px);
+    grid-template-columns: 1fr 1fr;
     grid-auto-rows: 161px;
     gap: 16px;
-    justify-content: center;
+    width: 100%;
     margin: 24px 0 12px;
 }
 
 .gender-card {
-    width: 167px;
+    width: 100%;
     height: 161px;
     border: 1px solid #e5e7eb;
     border-radius: 16px;

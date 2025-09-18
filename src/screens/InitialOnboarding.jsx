@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
-import {useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import "../App.css";
 import logo from "../assets/logo.png";
+import logo3 from "../assets/logo3.png";
 
 function InitialOnboarding() {
     const [IsSplash, setIsSplash] = useState(true);
@@ -9,7 +10,7 @@ function InitialOnboarding() {
     const navigate = useNavigate();
 
     useEffect(() => {
-        const t = setTimeout(() => setUp(true), 3000);
+        const t = setTimeout(() => setUp(true), 700);
         return () => clearTimeout(t);
     }, []);
 
@@ -22,15 +23,15 @@ function InitialOnboarding() {
             {IsSplash ? (
                 <div className="screen-1">
                     <img
-                        src={logo} alt="logo"
-                        className={`logo ${up ? "up" : ""}`}
+                        src={logo3} alt="logo"
+                        className={`logo ${up ? "up" : ""} w-[120px]`}
                         onTransitionEnd={handleTransitionEnd}
                     />
                 </div>
             ) : (
                 <div className="screen-2">
                     <div className="logo-layer">
-                        <img src={logo} alt="logo" className="logo up" />
+                        <img src={logo} alt="logo" className="logo up w-[125px]" />
                     </div>
                     <div className="top-content">
                         <h1 className="app-name">단짝이</h1>
@@ -38,7 +39,7 @@ function InitialOnboarding() {
                     </div>
                     <div className="bottom-buttons">
                         <button className="action-button primary"
-                                onClick={()=>{navigate("/signup")}}>시작하기</button>
+                                onClick={()=>{navigate("/signup")}}>회원가입</button>
                         <button className="action-button secondary"
                                 onClick={()=>{navigate("/Login")}}>로그인</button>
                         <button className="action-button third"
