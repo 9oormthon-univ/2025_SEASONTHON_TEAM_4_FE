@@ -11,8 +11,7 @@ export default function QuestOnePage() {
     };
 
     const handleComplete = () => {
-        console.log("Quest completed!");
-        navigate(-1); // 완료 후 뒤로 이동
+        navigate("/update");
     };
 
     return (
@@ -87,10 +86,10 @@ export default function QuestOnePage() {
             <div className="px-6 pb-8">
                 <button
                     onClick={handleComplete}
-                    className="w-full bg-teal-500 text-white text-lg font-medium py-4 rounded-2xl hover:bg-teal-600 transition-colors"
+                    className="w-full bg-teal-500 text-white text-lg font-medium py-2.5 rounded-2xl hover:bg-teal-600 transition-colors"
                     type="button"
                 >
-                    입력하기
+                    인증하기
                 </button>
             </div>
         </div>

@@ -18,6 +18,8 @@ import Signup_4 from "./screens/steps/Signup_4.jsx";
 import Signup_5 from "./screens/steps/Signup_5.jsx";
 import Signup_6 from "./screens/steps/Signup_6.jsx";
 import Signup_7 from "./screens/steps/Signup_7.jsx";
+import QuestUpdatePage from "./screens/kid/QuestUpdatePage.jsx";
+import QuestCheckPage from "./screens/kid/QuestCheckPage.jsx";
 
 export default function App() {
     return (
@@ -41,6 +43,8 @@ export default function App() {
                     <Route path="/quest" element={<QuestPage />} />
                     <Route path="/quest-1" element={<QuestOnePage />} />
                     <Route path="/report" element={<ReportPage />} />
+                    <Route path="/update" element={<QuestUpdatePage/>} />
+                    <Route path="/quest-check" element={<QuestCheckPage/>} />
                 </Routes>
             </SignupProvider>
         </Router>
