@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import * as yup from "yup";
 import "../styles/Signup.css";
+import { loginUser } from "../utils/api";
 
 const schema = yup.object().shape({
     email: yup.string().email("이메일 형식이 아닙니다").required("이메일은 필수입니다"),
@@ -26,24 +27,21 @@ export default function Login() {
         defaultValues: { email: "", password: "" },
     });
 
-    const onSubmit = async () => {
+    const onSubmit = async (formData) => {
         try {
             setErrMsg("");
             setLoading(true);
 
-            // // 정적 JSON에서 검증 (Vite: public/data/users.json -> /data/users.json)
-            // const res = await fetch("../../public/data/users.json");
-            // if (!res.ok) throw new Error("사용자 목록을 불러오지 못했습니다.");
-            // const data = await res.json();
-
-            // const ok = Array.isArray(data.users) && data.users.some(
-            //     (u) => u.email === form.email && u.password === form.password
-            // );
-            // if (!ok) throw new Error("이메일/비밀번호가 올바르지 않습니다");
-
-            // // 토큰/세션 흉내
-            // localStorage.setItem("token", "dev-mock-token");
-            navigate("/kid/home"); // 로그인 성공 후 이동
+            // 서버 로그인 요청 시도
+            const result = await loginUser(formData.email, formData.password);
+            
+            if (result.success) {
+                // 토큰 저장
+                localStorage.setItem("token", result.token);
+                navigate("/kid/home"); // 로그인 성공 후 이동
+            } else {
+                throw new Error("이메일/비밀번호가 올바르지 않습니다");
+            }
         } catch (e) {
             setErrMsg(e.message || "로그인 중 오류가 발생했습니다.");
         } finally {

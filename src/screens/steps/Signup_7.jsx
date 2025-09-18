@@ -11,6 +11,7 @@ import libre2 from '../../assets/libre2.png';
 import { useSignup } from '../../data/SignupData.jsx';
 import '../../styles/Signup.css';
 import '../../styles/Signup_7.css';
+import { signupUser } from '../../utils/api';
 
 const ID_TO_CODE = { caresense: 'CA', dexcom: 'DC', libre2: 'FL' };
 const CODE_TO_ID = { CA: 'caresense', DC: 'dexcom', FL: 'libre2' };
@@ -52,22 +53,18 @@ const SignUp_7 = () => {
             updateSignup({ sensor: code });
 
             // 최종 payload: 지금까지 모은 모든 값 + 센서 코드
-            // const payload = { ...data, sensor: code };
+            const payload = { ...data, sensor: code };
 
-            // const res = await fetch('/api/users/signup', {
-            //     method: 'POST',
-            //     headers: { 'Content-Type': 'application/json' },
-            //     body: JSON.stringify(payload)
-            // });
+            // 서버 회원가입 요청 시도
+            const result = await signupUser(payload);
 
-            // if (!res.ok) {
-            //     const msg = await res.text().catch(() => '');
-            //     throw new Error(msg || '회원가입 요청 실패');
-            // }
-
-            // 성공 처리: 상태 초기화 후 로그인 화면으로 이동
-            resetSignup?.();
-            navigate('/signup_success');
+            if (result.success) {
+                // 성공 처리: 상태 초기화 후 성공 화면으로 이동
+                resetSignup?.();
+                navigate('/signup_success');
+            } else {
+                throw new Error('회원가입 요청 실패');
+            }
         } catch (e) {
             setApiError(e.message || '전송 중 오류가 발생했습니다.');
         } finally {

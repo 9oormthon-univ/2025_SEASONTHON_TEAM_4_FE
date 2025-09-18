@@ -1,12 +1,19 @@
 import { DotLottieReact } from '@lottiefiles/dotlottie-react';
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import backgroundImg from "../../assets/background.png";
 import refreshIcon from "../../assets/coin.png";
 import TabBar from "../../components/TabBar.jsx";
+import { fetchBloodSugarData } from "../../utils/api";
 
 export default function KidHomePage() {
     const [selectedDate, setSelectedDate] = useState(new Date());
+    const [bloodSugarData, setBloodSugarData] = useState({
+        current: 257,
+        min: 82,
+        max: 127,
+        spikes: 2,
+    });
     const navigate = useNavigate();
     const { pathname } = useLocation();
 
@@ -45,6 +52,26 @@ export default function KidHomePage() {
     };
 
     const weekDates = getWeekDates();
+
+    // 혈당 데이터 로드
+    useEffect(() => {
+        const loadBloodSugarData = async () => {
+            try {
+                const userId = localStorage.getItem('userId') || 'user123';
+                const dateStr = selectedDate.toISOString().split('T')[0];
+                const data = await fetchBloodSugarData(userId, dateStr);
+                
+                if (data) {
+                    setBloodSugarData(data);
+                }
+            } catch (error) {
+                console.log('혈당 데이터 로드 중 오류:', error);
+                // 오류 발생 시 기본값 유지
+            }
+        };
+
+        loadBloodSugarData();
+    }, [selectedDate]);
 
     return (
         <div 
@@ -130,7 +157,7 @@ export default function KidHomePage() {
                             </div>
                         </div>
                         <div className="mt-2 text-4xl font-bold text-black">
-                            257
+                            {bloodSugarData.current}
                             <span className="text-xl font-normal text-[#8E8E8E]"> mg/dL</span>
                         </div>
                     </div>
@@ -181,19 +208,19 @@ export default function KidHomePage() {
                             <div className="bg-white rounded-2xl mx-1 px-1 py-6 shadow-sm text-center border border-gray-200">
                                 <h3 className="text-black text-lg font-medium mb-3">{"최저혈당"}</h3>
                                 <p className="text-2xl font-bold text-black">
-                                    82 <span className="text-xs font-normal text-gray-500">mg/dL</span>
+                                    {bloodSugarData.min} <span className="text-xs font-normal text-gray-500">mg/dL</span>
                                 </p>
                             </div>
                             <div className="bg-white rounded-2xl mx-1 px-1 py-6 shadow-sm text-center border border-gray-200">
                                 <h3 className="text-[#00BBA9] text-lg font-medium mb-3">{"스파이크"}</h3>
                                 <p className="text-2xl font-bold text-black">
-                                    2회 <span className="text-xs font-normal text-gray-500">/3회</span>
+                                    {bloodSugarData.spikes}회 <span className="text-xs font-normal text-gray-500">/3회</span>
                                 </p>
                             </div>
                             <div className="bg-white rounded-2xl mx-1 px-1 py-6 shadow-sm text-center border border-gray-200">
                                 <h3 className="text-[#F66D56] text-lg font-medium mb-3">{"최고혈당"}</h3>
                                 <p className="text-2xl font-bold text-black">
-                                    127 <span className="text-xs font-normal text-gray-500">mg/dL</span>
+                                    {bloodSugarData.max} <span className="text-xs font-normal text-gray-500">mg/dL</span>
                                 </p>
                             </div>
                         </div>

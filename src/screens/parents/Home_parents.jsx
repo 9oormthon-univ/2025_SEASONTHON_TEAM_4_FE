@@ -6,12 +6,24 @@ import Chart from "../../components/charts/Chart";
 
 // 탭바를 분리했지만, 한 파일에 같이 두고 싶으면 아래 컴포넌트를 같은 파일 최하단에 둬도 OK
 import TabBar from "../../components/TabBar";
+import { fetchBloodSugarData, fetchUserData } from "../../utils/api";
 
 export default function ParentHomePage({ score = 97 }) {
     const navigate = useNavigate();
     const [selectedDate] = useState(new Date());
     const [currentTime, setCurrentTime] = useState(new Date());
     const [isFloatingMenuOpen, setIsFloatingMenuOpen] = useState(false);
+    const [userData, setUserData] = useState({
+        name: '이단짝',
+        score: 97,
+        bloodSugar: {
+            current: 57,
+            average: 57,
+            min: 82,
+            max: 105,
+            spikes: 2
+        }
+    });
 
     // 플로팅 메뉴 액션 버튼들
     const floatingActions = [
@@ -62,10 +74,39 @@ export default function ParentHomePage({ score = 97 }) {
         return () => clearInterval(timer);
     }, []);
 
-    const handleUpdate = () => {
-        // 새로고침/리패치 자리. 일단 하드 리로드 예시:
-        // window.location.reload();
-        // 혹은 데이터만 재요청하도록 로직 연결
+    // 초기 데이터 로드
+    useEffect(() => {
+        handleUpdate();
+    }, [selectedDate]);
+
+    const handleUpdate = async () => {
+        try {
+            const userId = localStorage.getItem('userId') || 'user123';
+            const dateStr = selectedDate.toISOString().split('T')[0];
+            
+            // 사용자 데이터와 혈당 데이터를 동시에 로드
+            const [userResult, bloodSugarResult] = await Promise.all([
+                fetchUserData(userId),
+                fetchBloodSugarData(userId, dateStr)
+            ]);
+            
+            if (userResult && bloodSugarResult) {
+                setUserData({
+                    name: userResult.name || '이단짝',
+                    score: userResult.score || 97,
+                    bloodSugar: {
+                        current: bloodSugarResult.current || 57,
+                        average: bloodSugarResult.average || 57,
+                        min: bloodSugarResult.min || 82,
+                        max: bloodSugarResult.max || 105,
+                        spikes: bloodSugarResult.spikes || 2
+                    }
+                });
+            }
+        } catch (error) {
+            console.log('데이터 업데이트 중 오류:', error);
+            // 오류 발생 시 기본값 유지
+        }
     };
 
     return (
@@ -130,7 +171,7 @@ export default function ParentHomePage({ score = 97 }) {
                     >
                         <div className="flex items-center justify-between">
                             <h3 className="text-lg font-medium">
-                                이단짝님의 혈당건강지수는?
+                                {userData.name}님의 혈당건강지수는?
                             </h3>
                             
                             <div className="flex items-center gap-2">
@@ -153,7 +194,7 @@ export default function ParentHomePage({ score = 97 }) {
                             </div>
                         </div>
                         <div className="mt-2 text-4xl font-bold">
-                            {score}
+                            {userData.score}
                             <span className="text-xl font-normal">점</span>
                         </div>
                     </div>
@@ -170,29 +211,29 @@ export default function ParentHomePage({ score = 97 }) {
                          <h3 className="text-black text-lg font-medium my-4 text-center">오늘은 혈당이 전반적으로 안정적이에요!</h3>
                          <div className="flex gap-4 mb-4 mx-2">
                             <div className="flex-1 px-3 py-4 border border-gray-200 rounded-lg text-center">
-                                현재수치 <span className="font-bold">57</span><span className="text-gray-500">mg/dL</span>
+                                현재수치 <span className="font-bold">{userData.bloodSugar.current}</span><span className="text-gray-500">mg/dL</span>
                             </div>
                             <div className="flex-1 px-3 py-4 border border-gray-200 rounded-lg text-center">
-                                평균혈당 <span className="font-bold">57</span><span className="text-gray-500">mg/dL</span>
+                                평균혈당 <span className="font-bold">{userData.bloodSugar.average}</span><span className="text-gray-500">mg/dL</span>
                             </div>
                          </div>
                          <div className="grid grid-cols-3 gap-2 mb-2">
                              <div className="bg-[#386dae19] rounded-2xl mx-2 px-1 py-4 shadow-sm text-center border border-gray-200">
                                  <h3 className="text-black text-md font-medium mb-4">{"최저혈당 >"}</h3>
                                  <p className="text-2xl font-bold text-black">
-                                     82 <span className="text-xs font-normal text-gray-500">mg/dL</span>
+                                     {userData.bloodSugar.min} <span className="text-xs font-normal text-gray-500">mg/dL</span>
                                  </p>
                              </div>
                              <div className="bg-[#00BBA919] rounded-2xl mx-2 px-1 py-4 shadow-sm text-center border border-gray-200">
                                  <h3 className="text-[#00BBA9] text-md font-medium mb-4">{"스파이크 >"}</h3>
                                  <p className="text-2xl font-bold text-black">
-                                     2회 <span className="text-xs font-normal text-gray-500">/3회</span>
+                                     {userData.bloodSugar.spikes}회 <span className="text-xs font-normal text-gray-500">/3회</span>
                                  </p>
                              </div>
                              <div className="bg-[#F66D5619] rounded-2xl mx-2 px-1 py-4 shadow-sm text-center border border-gray-200">
                                  <h3 className="text-[#F66D56] text-md font-medium mb-4">{"최고혈당 >"}</h3>
                                  <p className="text-2xl font-bold text-black">
-                                     105 <span className="text-xs font-normal text-gray-500">mg/dL</span>
+                                     {userData.bloodSugar.max} <span className="text-xs font-normal text-gray-500">mg/dL</span>
                                  </p>
                              </div>
                          </div>
@@ -233,7 +274,7 @@ export default function ParentHomePage({ score = 97 }) {
 
                     {/* 이단짝의 기록 */}
                     <div className="bg-white rounded-2xl mt-4 py-8 px-6">
-                        <h3 className="text-black text-lg font-medium mb-6">이단짝의 기록</h3>
+                        <h3 className="text-black text-lg font-medium mb-6">{userData.name}의 기록</h3>
                         
                         <div className="space-y-4">
                             <div className="flex items-center">
