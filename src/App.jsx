@@ -6,6 +6,7 @@ import Login from "./screens/Login.jsx";
 import Signup_for_parents from "./screens/Signup_for_parents.jsx";
 import Signup_success from "./screens/Signup_success.jsx";
 import KidHomePage from "./screens/kid/Home_kid.jsx";
+import My from "./screens/kid/My.jsx";
 import QuestCheckPage from "./screens/kid/QuestCheckPage.jsx";
 import QuestOnePage from "./screens/kid/QuestOnePage.jsx";
 import QuestPage from "./screens/kid/QuestPage.jsx";
@@ -49,6 +50,7 @@ export default function App() {
                     <Route path="/report" element={<ReportPage />} />
                     <Route path="/update" element={<QuestUpdatePage/>} />
                     <Route path="/quest-check" element={<QuestCheckPage/>} />
+                    <Route path="/my" element={<My/>} />
                 </Routes>
             </SignupProvider>
         </Router>

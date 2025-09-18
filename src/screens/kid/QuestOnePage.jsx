@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import water from "../../assets/water.png"
+import water from "../../assets/water.png";
 
 export default function QuestOnePage() {
     const navigate = useNavigate();
@@ -41,10 +41,8 @@ export default function QuestOnePage() {
             <div className="flex-1 flex flex-col items-center justify-center px-6 py-8">
                 {/* 메시지 */}
                 <div className="text-center mb-8">
-                    <h2 className="text-2xl font-bold text-black mb-4">단짝이가 궁금해요</h2>
-                    <p className="text-lg text-gray-700">
-                        오늘 물 몇 컵 마셨는지 기록해 주세요!
-                    </p>
+                    <h2 className="text-2xl font-bold text-black mb-2">혈당이 살짝 높아졌어</h2>
+                    <h2 className="text-2xl font-bold text-black mb-4">지금 물 한 컵 마시고 기록해줘!</h2>
                 </div>
 
                 {/* 캐릭터 */}
@@ -57,29 +55,6 @@ export default function QuestOnePage() {
                         className="object-contain"
                     />
                 </div>
-
-                {/* 숫자 입력 */}
-                <div className="flex items-center gap-4 mb-8">
-                    <button
-                        onClick={() => setWaterCount(Math.max(0, waterCount - 1))}
-                        className="w-12 h-12 bg-gray-200 rounded-full flex items-center justify-center hover:bg-gray-300 transition-colors"
-                        type="button"
-                    >
-                        <span className="text-xl font-bold text-gray-600">−</span>
-                    </button>
-
-                    <div className="text-4xl font-bold text-teal-500 min-w-16 text-center">
-                        {waterCount}
-                    </div>
-
-                    <button
-                        onClick={() => setWaterCount(waterCount + 1)}
-                        className="w-12 h-12 bg-gray-200 rounded-full flex items-center justify-center hover:bg-gray-300 transition-colors"
-                        type="button"
-                    >
-                        <span className="text-xl font-bold text-gray-600">+</span>
-                    </button>
-                </div>
             </div>
 
             {/* 하단 버튼 */}
@@ -89,7 +64,7 @@ export default function QuestOnePage() {
                     className="w-full bg-teal-500 text-white text-lg font-medium py-2.5 rounded-2xl hover:bg-teal-600 transition-colors"
                     type="button"
                 >
-                    인증하기
+                    인증하러 가기
                 </button>
             </div>
         </div>

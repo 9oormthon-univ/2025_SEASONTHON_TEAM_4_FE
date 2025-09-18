@@ -1,5 +1,5 @@
 import React from "react";
-import {useLocation, useNavigate} from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import TabBar from "../../components/TabBar.jsx";
 
 export default function QuestCheckPage() {
@@ -74,7 +74,7 @@ export default function QuestCheckPage() {
                 <section>
                     <h2 className="text-sm font-semibold text-gray-900 mb-2">메뉴</h2>
                     <div className="flex items-center justify-between rounded-2xl bg-gray-100 px-4 py-3">
-                        <span className="text-sm font-semibold text-black">치킨, 피자</span>
+                        <span className="text-sm font-semibold text-black">치킨</span>
                         <span className="rounded-full bg-teal-500 text-white text-xs font-semibold px-3 py-1">
         총 750Kcal
       </span>

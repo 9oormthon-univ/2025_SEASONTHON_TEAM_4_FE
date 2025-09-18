@@ -46,9 +46,9 @@ export default function QuestUpdatePage() {
             <main className="flex-1 px-6 py-10">
                 <div className="space-y-6">
                     {/* 식사명 */}
-                    <div>
-                        <label className="block text-sm font-semibold text-gray-900 mb-2">식사명</label>
-                        <div className="rounded-2xl bg-white px-4 py-3
+                    <div className="mb-8">
+                        <label className="block text-md font-semibold text-gray-900 mb-2">식사명</label>
+                        <div className="rounded-xl bg-white px-4 py-3
                         ring-1 ring-inset ring-[#CACACA]
                         focus-within:ring-2 focus-within:ring-[#CACACA] transition">
                             <input
@@ -62,9 +62,9 @@ export default function QuestUpdatePage() {
                     </div>
 
                     {/* 식사 시간 */}
-                    <div>
-                        <label className="block text-sm font-semibold text-gray-900 mb-2">식사 시간</label>
-                        <div className="rounded-2xl bg-white px-4 py-3
+                    <div className="mb-8">
+                        <label className="block text-md font-semibold text-gray-900 mb-2">식사 시간</label>
+                        <div className="rounded-xl bg-white px-4 py-3
                         ring-1 ring-inset ring-[#CACACA]
                         focus-within:ring-2 focus-within:ring-[#CACACA] transition">
 
@@ -81,7 +81,7 @@ export default function QuestUpdatePage() {
                     {/* 메뉴 */}
                     <div>
                         <div className="flex items-center justify-between mb-2">
-                            <label className="block text-sm font-semibold text-gray-900">메뉴</label>
+                            <label className="block text-md font-semibold text-gray-900">메뉴</label>
                             <button
                                 type="button"
                                 onClick={handleAddMenu}
@@ -93,7 +93,7 @@ export default function QuestUpdatePage() {
                         </div>
 
                         <div
-                            className="relative rounded-2xl bg-white px-4 py-3
+                            className="relative rounded-xl bg-white px-4 py-3
              ring-1 ring-inset ring-[#CACACA]
              focus-within:ring-2 focus-within:ring-[#CACACA] transition"
                         >

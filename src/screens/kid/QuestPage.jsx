@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import happy from "../../assets/happy.png";
+import icon from "../../assets/icon.png";
+import lock from "../../assets/lock.png";
 import TabBar from "../../components/TabBar.jsx";
-import danger from "../../assets/danger.png"
-import icon from "../../assets/icon.png"
 
 export default function QuestPage() {
     const [selectedDate, setSelectedDate] = useState(new Date());
@@ -60,7 +61,7 @@ export default function QuestPage() {
     return (
         <div className="min-h-screen flex flex-col">
             {/* 상단 월 표시 */}
-            <div className="px-6 py-6 bg-white">
+            <div className="px-6 py-6 bg-white mb-2">
                 <div className="flex items-center justify-center">
                     <h1 className="text-xl font-bold text-black">{getCurrentMonth()}</h1>
                     <svg
@@ -131,74 +132,121 @@ export default function QuestPage() {
             </div>
 
             {/* 메인 컨텐츠 영역 */}
-            <div className="flex-1 flex flex-col items-center justify-center px-6 py-8 bg-gray-100 rounded-t-3xl shadow-lg">
-                <div className="mb-2">
-                    <h2 className="text-2xl font-bold text-black text-center">
-                        단짝이를 건강하게 지켜주세요!
+            <div className="flex-1 flex flex-col px-6 py-8 bg-[#F2FBFA] rounded-t-3xl shadow-lg">
+                {/* 제목 */}
+                <div className="mb-8">
+                    <h2 className="text-2xl font-semibold text-black text-left">
+                        오늘의 퀘스트
                     </h2>
                 </div>
 
-                {/* 캐릭터 */}
-                <div className="mb-8">
-                    <img
-                        src={danger}
-                        alt="단짝 캐릭터"
-                        width={200}
-                        height={200}
-                        className="object-contain"
-                    />
+                {/* 캐릭터와 말풍선 */}
+                <div className="flex flex-col items-center">
+                    {/* 말풍선 */}
+                    <div className="relative bg-white rounded-2xl px-6 py-3 mb-4 shadow-md">
+                        <p className="text-teal-500 font-medium text-lg">
+                            나를 건강하게 지켜줘!
+                        </p>
+                        {/* 말풍선 꼬리 */}
+                        <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-[11px]">
+                            <div className="w-0 h-0 border-l-[12px] border-r-[12px] border-t-[12px] border-l-transparent border-r-transparent border-t-white"></div>
+                        </div>
+                    </div>
+                    
+                    {/* 캐릭터 */}
+                    <div>
+                        <img
+                            src={happy}
+                            alt="단짝 캐릭터"
+                            width={200}
+                            height={200}
+                            className="object-contain"
+                        />
+                    </div>
                 </div>
 
                 {/* 퀘스트 도장들 */}
-                <div className="flex justify-center gap-6">
-                    {/* 완료 도장 */}
-                    <div className="relative flex flex-col items-center">
-                        <div className="w-20 h-20 bg-white rounded-full border-2 border-solid border-teal-400 flex items-center justify-center relative">
-                            <div className="w-16 h-16 rounded-full border-2 border-dashed border-teal-400 flex items-center justify-center">
-                                <img
-                                    src={icon}
-                                    alt="단짝 캐릭터"
-                                    width={40}
-                                    height={40}
-                                    className="object-contain"
-                                />
+                <div className="flex flex-col items-center gap-6 justify-center flex-1 pb-12">
+                    {/* 첫 번째 줄 */}
+                    <div className="flex justify-center gap-6">
+                        {/* 완료 도장 1 */}
+                        <div className="relative flex flex-col items-center">
+                            <div className="w-20 h-20 bg-white rounded-full border-2 border-solid border-gray-300 flex items-center justify-center relative">
+                                <div className="w-16 h-16 rounded-full border-2 border-dashed border-gray-300 flex items-center justify-center">
+                                    <span className="text-gray-400 text-sm">완료</span>
+                                </div>
                             </div>
                         </div>
-                        <button
+
+                        {/* 완료 도장 2 */}
+                        <button 
                             onClick={handleNext}
-                            className="absolute -bottom-0 bg-teal-500 text-white px-2 py-1 rounded-full text-xs font-medium hover:bg-teal-600 transition-colors"
+                            className="relative flex flex-col items-center hover:scale-105 transition-transform"
                         >
-                            퀘스트 열기
+                            <div className="w-20 h-20 bg-white rounded-full border-2 border-solid border-teal-400 flex items-center justify-center relative">
+                                <div className="w-16 h-16 rounded-full border-2 border-dashed border-teal-400 flex items-center justify-center">
+                                    <img
+                                        src={icon}
+                                        alt="단짝 캐릭터"
+                                        width={40}
+                                        height={40}
+                                        className="object-contain"
+                                    />
+                                </div>
+                            </div>
+                            <div className="absolute -bottom-0 bg-teal-500 text-white px-2 py-1 rounded-full text-xs font-medium">
+                                퀘스트 열기
+                            </div>
+                        </button>
+
+                        {/* 완료 도장 3 */}
+                        <button 
+                            onClick={handleNext}
+                            className="relative flex flex-col items-center hover:scale-105 transition-transform"
+                        >
+                            <div className="w-20 h-20 bg-white rounded-full border-2 border-solid border-teal-400 flex items-center justify-center relative">
+                                <div className="w-16 h-16 rounded-full border-2 border-dashed border-teal-400 flex items-center justify-center">
+                                    <img
+                                        src={icon}
+                                        alt="단짝 캐릭터"
+                                        width={40}
+                                        height={40}
+                                        className="object-contain"
+                                    />
+                                </div>
+                            </div>
+                            <div className="absolute -bottom-0 bg-teal-500 text-white px-2 py-1 rounded-full text-xs font-medium">
+                                퀘스트 열기
+                            </div>
                         </button>
                     </div>
 
-                    {/* 완료 도장 */}
-                    <div className="relative flex flex-col items-center">
-                        <div className="w-20 h-20 bg-white rounded-full border-2 border-solid border-teal-400 flex items-center justify-center relative">
-                            <div className="w-16 h-16 rounded-full border-2 border-dashed border-teal-400 flex items-center justify-center">
-                                <img
-                                    src=
-                                        {icon}
-                                    alt="단짝 캐릭터"
-                                    width={40}
-                                    height={40}
-                                    className="object-contain"
-                                />
+                    {/* 두 번째 줄 */}
+                    <div className="flex justify-center gap-6">
+                        {/* 미완료 도장 1 */}
+                        <div className="flex flex-col items-center">
+                            <div className="w-20 h-20 bg-white rounded-full border-2 border-solid border-gray-300 flex items-center justify-center mb-2 relative">
+                                <div className="w-16 h-16 rounded-full border-2 border-dashed border-gray-300 flex items-center justify-center">
+                                    <span className="text-gray-400 text-sm">완료</span>
+                                </div>
                             </div>
                         </div>
-                        <button
-                            onClick={handleNext}
-                            className="absolute -bottom-0 bg-teal-500 text-white px-2 py-1 rounded-full text-xs font-medium hover:bg-teal-600 transition-colors"
-                        >
-                            퀘스트 열기
-                        </button>
-                    </div>
 
-                    {/* 미완료 도장 */}
-                    <div className="flex flex-col items-center">
-                        <div className="w-20 h-20 bg-white rounded-full border-2 border-solid border-gray-300 flex items-center justify-center mb-2 relative">
-                            <div className="w-16 h-16 rounded-full border-2 border-dashed border-gray-300 flex items-center justify-center">
-                                <span className="text-gray-400 text-sm">완료</span>
+                        {/* 미완료 도장 2 */}
+                        <div className="flex flex-col items-center">
+                            <div className="w-20 h-20 bg-white rounded-full border-2 border-solid border-gray-300 flex items-center justify-center mb-2 relative">
+                                <div className="w-16 h-16 rounded-full border-2 border-dashed border-gray-300 flex items-center justify-center">
+                                    <img src={lock} alt="잠금" width={40} height={40} className="object-contain" />
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* 미완료 도장 3 */}
+                        <div className="flex flex-col items-center">
+                            <div className="w-20 h-20 bg-white rounded-full border-2 border-solid border-gray-300 flex items-center justify-center mb-2 relative">
+                                <div className="w-16 h-16 rounded-full border-2 border-dashed border-gray-300 flex items-center justify-center">
+                                    <img src={lock} alt="잠금" width={40} height={40} className="object-contain" />
+                                </div>
                             </div>
                         </div>
                     </div>
