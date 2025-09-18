@@ -84,7 +84,7 @@ export default function Report_parents() {
                 <div className="px-6 mb-6">
                     <div className="grid grid-cols-2 gap-4">
                         {stats.map((stat, index) => (
-                            <div key={index} className="bg-white text-[20px] rounded-2xl py-4 text-center border border-gray-100 shadow-sm">
+                            <div key={index} className="bg-white text-[18px] rounded-2xl py-4 text-center border border-gray-100 shadow-sm">
                                 <span className="text-[#8E8E8E] mb-2 mr-2">{stat.label}</span>
                                 <span className="text-black">{stat.value}</span>
                                 <span className="text-[#8E8E8E]">{stat.unit}</span>

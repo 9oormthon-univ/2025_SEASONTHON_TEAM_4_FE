@@ -57,17 +57,20 @@ export default function KidHomePage() {
             }}
         >
             {/* 상단 월 표시 */}
-            <div className="pt-safe-top mt-4 px-6 py-4 bg-transparent backdrop-blur-sm">
+            <div className="pt-safe-top mt-2 px-6 py-4 bg-transparent backdrop-blur-sm">
                 <button
-                    className="mx-auto flex items-center justify-center gap-1"
+                    className="mx-auto flex items-center justify-center"
                     aria-label="달력 보기"
                 >
                     <h1 className="text-xl font-bold text-black">{getCurrentMonth()}</h1>
-                    <div className="w-5 h-5 ml-2 bg-[#EEEEEE] rounded-full flex items-center justify-center">
-                        <svg className="w-3 h-3 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                        </svg>
-                    </div>
+                    <svg
+                        className="w-5 h-5 ml-2 text-gray-600"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                    >
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                    </svg>
                 </button>
             </div>
 
@@ -82,7 +85,7 @@ export default function KidHomePage() {
                             <button
                                 key={index}
                                 onClick={() => setSelectedDate(date)}
-                                className={`flex flex-col gap-4 items-center justify-center rounded-full px-4 py-5 transition-colors ${
+                                className={`flex flex-col gap-3 items-center justify-center rounded-full px-4 py-5 transition-colors ${
                                     isSelected
                                         ? 'bg-[#E5412A] hover:bg-[#E5412A]'
                                         : 'bg-white hover:bg-gray-300'
@@ -134,7 +137,7 @@ export default function KidHomePage() {
 
                     {/* 캐릭터 영역 */}
                     <div className="flex justify-center mb-4">
-                        <div className="w-60 h-60">
+                        <div className="w-50 h-50">
                             <DotLottieReact
                                 src="https://lottie.host/3ffa87b5-a9ac-4f52-b8f4-392cd2712988/KE4JAd1KWs.lottie"
                                 loop
@@ -176,19 +179,19 @@ export default function KidHomePage() {
                     <div className="rounded-2xl p-4">
                         <div className="grid grid-cols-3 gap-1 mb-2">
                             <div className="bg-white rounded-2xl mx-1 px-1 py-6 shadow-sm text-center border border-gray-200">
-                                <h3 className="text-black text-lg font-medium mb-4">{"최저혈당"}</h3>
+                                <h3 className="text-black text-lg font-medium mb-3">{"최저혈당"}</h3>
                                 <p className="text-2xl font-bold text-black">
                                     82 <span className="text-xs font-normal text-gray-500">mg/dL</span>
                                 </p>
                             </div>
                             <div className="bg-white rounded-2xl mx-1 px-1 py-6 shadow-sm text-center border border-gray-200">
-                                <h3 className="text-[#00BBA9] text-lg font-medium mb-4">{"스파이크"}</h3>
+                                <h3 className="text-[#00BBA9] text-lg font-medium mb-3">{"스파이크"}</h3>
                                 <p className="text-2xl font-bold text-black">
                                     2회 <span className="text-xs font-normal text-gray-500">/3회</span>
                                 </p>
                             </div>
                             <div className="bg-white rounded-2xl mx-1 px-1 py-6 shadow-sm text-center border border-gray-200">
-                                <h3 className="text-[#F66D56] text-lg font-medium mb-4">{"최고혈당"}</h3>
+                                <h3 className="text-[#F66D56] text-lg font-medium mb-3">{"최고혈당"}</h3>
                                 <p className="text-2xl font-bold text-black">
                                     127 <span className="text-xs font-normal text-gray-500">mg/dL</span>
                                 </p>

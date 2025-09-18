@@ -134,8 +134,8 @@ export default function QuestPage() {
             {/* 메인 컨텐츠 영역 */}
             <div className="flex-1 flex flex-col px-6 py-8 bg-[#F2FBFA] rounded-t-3xl shadow-lg">
                 {/* 제목 */}
-                <div className="mb-8">
-                    <h2 className="text-2xl font-semibold text-black text-left">
+                <div className="mb-6">
+                    <h2 className="text-xl font-semibold text-black text-left">
                         오늘의 퀘스트
                     </h2>
                 </div>
@@ -143,8 +143,8 @@ export default function QuestPage() {
                 {/* 캐릭터와 말풍선 */}
                 <div className="flex flex-col items-center">
                     {/* 말풍선 */}
-                    <div className="relative bg-white rounded-2xl px-6 py-3 mb-4 shadow-md">
-                        <p className="text-teal-500 font-medium text-lg">
+                    <div className="relative bg-white rounded-2xl px-6 py-3 shadow-md">
+                        <p className="text-teal-500 font-medium text-md">
                             나를 건강하게 지켜줘!
                         </p>
                         {/* 말풍선 꼬리 */}
@@ -158,15 +158,15 @@ export default function QuestPage() {
                         <img
                             src={happy}
                             alt="단짝 캐릭터"
-                            width={200}
-                            height={200}
+                            width={160}
+                            height={160}
                             className="object-contain"
                         />
                     </div>
                 </div>
 
                 {/* 퀘스트 도장들 */}
-                <div className="flex flex-col items-center gap-6 justify-center flex-1 pb-12">
+                <div className="flex flex-col items-center gap-4 justify-center flex-1 pb-12">
                     {/* 첫 번째 줄 */}
                     <div className="flex justify-center gap-6">
                         {/* 완료 도장 1 */}
@@ -252,16 +252,6 @@ export default function QuestPage() {
                     </div>
                 </div>
             </div>
-
-            {/* 플로팅 추가 버튼 */}
-            <button
-                className="fixed bottom-24 right-6 w-14 h-14 bg-slate-700 rounded-full flex items-center justify-center shadow-lg"
-                type="button"
-            >
-                <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
-                </svg>
-            </button>
 
             {/* 바텀 네비게이션 */}
             <TabBar

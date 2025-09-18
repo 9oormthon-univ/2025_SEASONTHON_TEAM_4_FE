@@ -60,7 +60,7 @@ export default function Badge() {
             </div>
 
             {/* 하단 달성 정보 */}
-            <div className="bg-[#F9EBE8] backdrop-blur-sm px-6 pt-16 pb-24 flex flex-col items-center">
+            <div className="bg-[#F9EBE8] backdrop-blur-sm px-6 pt-8 pb-24 flex flex-col items-center">
                 <div className="flex items-center justify-center gap-3 mb-6">
                     <p className="text-[24px] font-semibold text-black">
                         💡 야식 없는 날 <span className="text-[#E5412A]">4</span>회 달성

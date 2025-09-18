@@ -156,3 +156,45 @@ body { margin: 0; }
     height: auto;
     animation: fadeUp 0.6s ease 0.05s both;
 }
+
+.celebrate-stack {
+    position: relative;
+    width: 240px;
+    aspect-ratio: 1 / 1;
+    margin: 16px auto 24px; 
+}
+
+.celebrate-lottie,
+.celebrate-image {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.celebrate-lottie {
+    z-index: 2;
+}
+.celebrate-stack {
+  position: relative;
+  width: 240px;
+  aspect-ratio: 1 / 1;
+  margin: 16px auto 24px;
+}
+
+.celebrate-lottie,
+.celebrate-image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.celebrate-lottie {
+  z-index: 1;
+  pointer-events: none;
+}
+.celebrate-image {
+  z-index: 2;
+  object-fit: contain;
+}

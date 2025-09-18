@@ -11,12 +11,12 @@ export default defineConfig({
       manifest: {
         name: '단짝이',
         short_name: '단짝이',
-        theme_color: '#00BBA9',
+        theme_color: '#FFFFFF',
         display: 'standalone',
         start_url: '/',
         icons: [
           {
-            src: '/src/assets/logo.png',
+            src: '/logo2.png',
             sizes: '192x192',
             type: 'image/png'
           }

@@ -28,7 +28,31 @@ const Graph = ({ data = [], minThreshold = 80, maxThreshold = 130 }) => {
         { t: '10시 40분', value: 122 },
         { t: '10시 45분', value: 98 },
         { t: '10시 50분', value: 72 },
-        { t: '10시 55분', value: 88 }
+        { t: '10시 55분', value: 88 },
+        { t: '11시', value: 95 },
+        { t: '11시 5분', value: 112 },
+        { t: '11시 10분', value: 128 },
+        { t: '11시 15분', value: 145 },
+        { t: '11시 20분', value: 162 },
+        { t: '11시 25분', value: 178 },
+        { t: '11시 30분', value: 195 },
+        { t: '11시 35분', value: 210 },
+        { t: '11시 40분', value: 225 },
+        { t: '11시 45분', value: 218 },
+        { t: '11시 50분', value: 205 },
+        { t: '11시 55분', value: 192 },
+        { t: '12시', value: 175 },
+        { t: '12시 5분', value: 158 },
+        { t: '12시 10분', value: 142 },
+        { t: '12시 15분', value: 125 },
+        { t: '12시 20분', value: 108 },
+        { t: '12시 25분', value: 95 },
+        { t: '12시 30분', value: 88 },
+        { t: '12시 35분', value: 92 },
+        { t: '12시 40분', value: 105 },
+        { t: '12시 45분', value: 118 },
+        { t: '12시 50분', value: 132 },
+        { t: '12시 55분', value: 125 }
     ];
 
     const chartData = data.length > 0 ? data : sampleData;
@@ -41,11 +65,13 @@ const Graph = ({ data = [], minThreshold = 80, maxThreshold = 130 }) => {
 
     // 값에 따른 동적 색상 계산
     const getColorForValue = (value) => {
-        if (value >= minThreshold && value <= maxThreshold) {
-            // 정상 범위 (80-130): 파란색 계열
+        if (value <= 80) {
+            return '#1B3759';
+        } else if (value <= 150) {
             return '#00BBA9';
+        } else if (value <= 200) {
+            return '#FDA296';
         } else {
-            // 비정상 범위: 주황색 계열
             return '#C23E2B';
         }
     };
@@ -55,30 +81,9 @@ const Graph = ({ data = [], minThreshold = 80, maxThreshold = 130 }) => {
 
         visibleData.forEach((item, index) => {
             const offset = index / (visibleData.length - 1);
-            let color;
-
-            if (item.value >= minThreshold && item.value <= maxThreshold) {
-                color = '#00BBA9';
-            } else {
-                color = '#C23E2B';
-            }
+            const color = getColorForValue(item.value);
 
             colorStops.push({ offset, color });
-
-            if (index < visibleData.length - 1) {
-                const current = item.value;
-                const next = visibleData[index + 1].value;
-                const currentInRange = current >= minThreshold && current <= maxThreshold;
-                const nextInRange = next >= minThreshold && next <= maxThreshold;
-
-                if (currentInRange !== nextInRange) {
-                    const midOffset = (offset + (index + 1) / (visibleData.length - 1)) / 2;
-                    colorStops.push({
-                        offset: midOffset,
-                        color: '#FDA296' // 보라색 전환색
-                    });
-                }
-            }
         });
 
         return new echarts.graphic.LinearGradient(0, 0, 1, 0, colorStops);

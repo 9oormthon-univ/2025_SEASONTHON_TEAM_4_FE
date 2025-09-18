@@ -1,6 +1,8 @@
+import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 import { useNavigate } from "react-router-dom";
-import icon from "../assets/icon.png";
+import success from "../assets/success.png";
 import "../styles/Signup.css";
+
 
 function Signup_success() {
     const navigator = useNavigate();
@@ -16,11 +18,18 @@ function Signup_success() {
                             <h1>가입 완료됐습니다</h1>
                         </div>
                         
-                        <div className="flex flex-col items-center justify-center flex-1 mt-[40px]">
-                            <img 
-                                className="max-w-[200px] h-auto animate-pulse"
-                                src={icon} 
-                                alt="signup-success-img" 
+                        <div className="celebrate-stack">
+                            <DotLottieReact
+                                src="https://lottie.host/fed4c68a-87a0-4483-931b-35a6ff5eeecd/BKANsGw8Pl.lottie"
+                                loop
+                                autoplay
+                                className="celebrate-lottie"
+                                aria-hidden
+                            />
+                            <img
+                                className="celebrate-image"
+                                src={success}
+                                alt="signup-success-img"
                             />
                         </div>
                     </div>

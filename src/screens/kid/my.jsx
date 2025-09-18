@@ -29,7 +29,7 @@ export default function My() {
             {/* 메인 컨텐츠 */}
             <div className="flex-1 py-6 pb-20 overflow-y-auto">
                 {/* 프로필 섹션 */}
-                <div className="flex flex-col items-center mb-8">
+                <div className="flex flex-col items-center mb-4">
                     {/* 프로필 이미지 */}
                     <div className="w-24 h-24 bg-gray-300 rounded-full flex items-center justify-center mb-4">
                         <svg className="w-12 h-12 text-gray-600" fill="currentColor" viewBox="0 0 24 24">
@@ -52,7 +52,7 @@ export default function My() {
                 </div>
 
                 {/* 키/몸무게 카드 */}
-                <div className="grid grid-cols-2 gap-4 mb-8 px-6">
+                <div className="grid grid-cols-2 gap-4 mb-6 px-6">
                     {/* 키 카드 */}
                     <div className="bg-white rounded-2xl p-6 text-center shadow-sm border border-gray-100">
                         <p className="text-[16px] text-gray-500 mb-2">키</p>

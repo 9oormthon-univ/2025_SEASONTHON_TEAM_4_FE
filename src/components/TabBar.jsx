@@ -21,7 +21,7 @@ export default function TabBar({ active = "home", onHome, onQuest, onReport, onM
     };
 
     return (
-        <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 px-6 py-2 pb-safe-bottom z-50 rounded-t-3xl">
+        <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 px-6 pt-2 pb-4 pb-safe-bottom z-50 rounded-t-3xl">
             <div className="flex justify-around items-center">
                 {item("home", "홈", (on) => (
                     <svg className={`w-full h-full ${on ? "text-teal-500" : "text-gray-400"}`} fill="currentColor" viewBox="0 0 24 24">

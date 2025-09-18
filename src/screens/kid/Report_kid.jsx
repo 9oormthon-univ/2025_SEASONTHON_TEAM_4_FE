@@ -16,50 +16,53 @@ export default function Report_kid() {
 
     return (
         <div 
-            className="h-screen flex flex-col overflow-hidden"
+            className="h-screen flex flex-col"
             style={{
                 backgroundImage: `url(${kidReportBackground})`,
                 backgroundSize: 'cover',
-                backgroundPosition: 'center',
+                backgroundPosition: 'center -55px',
                 backgroundRepeat: 'no-repeat'
             }}
         >
             {/* 상단 제목 */}
-            <div className="px-6 pt-6 pb-4 flex-shrink-0">
-                <h1 className="text-[20px] font-semibold text-black text-center">
+            <div className="px-6 pt-4 pb-3 flex-shrink-0">
+                <h1 className="text-[17px] font-semibold text-black text-center">
                     한눈에 보는 주간 리포트
                 </h1>
             </div>
 
             {/* 메인 컨텐츠 */}
-            <div className="flex-1 flex flex-col min-h-0">
+            <div className="flex-1 flex flex-col">
                 {/* 상단 컨텐츠 (제목 + 캐릭터) */}
-                <div className="flex-1 px-6 pt-8 flex flex-col justify-center min-h-0">
+                <div className="px-6 pt-4 pb-4">
                     {/* 제목 */}
-                    <div className="mb-2">
-                        <h2 className="text-[24px] font-bold text-black">
+                    <div className="mb-3 ml-2 mt-4">
+                        <h2 className="text-[18px] font-bold text-black">
                             단짝이의
                         </h2>
-                        <h2 className="text-[24px] font-bold text-black">
+                        <h2 className="text-[18px] font-bold text-black">
                             일주일 혈당은?
                         </h2>
                     </div>
 
                     {/* 캐릭터 이미지 */}
-                    <div className="flex justify-center flex-1 items-center">
+                    <div className="flex justify-center pt-14">
                         <img 
                             src={reportCharacter} 
                             alt="걱정하는 단짝이" 
-                            className="max-w-[200px] max-h-[200px] object-contain"
+                            className="max-w-[220px] max-h-[220px] object-contain"
                         />
                     </div>
                 </div>
 
+                {/* 빈 공간 */}
+                <div className="flex-1"></div>
+
                 {/* 하단 고정 섹션 */}
-                <div className="bg-transparent pb-20 flex-shrink-0">
+                <div className="bg-transparent pb-25">
                     {/* 상태 박스 */}
-                    <div className="px-6 pt-4">
-                        <div className="bg-white rounded-[8px] p-4 mb-6 border border-gray-200 shadow-sm">
+                    <div className="px-6">
+                        <div className="bg-white rounded-[8px] p-4 mb-2 border border-gray-200 shadow-sm">
                             <div className="text-center">
                                 <p className="text-[16px] text-[#8E8E8E]">이번주 단짝이는</p>
                                 <p className="text-[20px] font-bold text-black mb-2">경미 과혈당</p>
@@ -79,7 +82,7 @@ export default function Report_kid() {
                     <div className="grid grid-cols-4 gap-4 mb-4 mx-6">
                         {/* 저혈당 */}
                         <div className="bg-white rounded-[16px] p-4 text-center shadow-sm">
-                            <p className="text-[14px] text-black mb-1">저혈당</p>
+                            <p className="text-[12px] text-black mb-1">저혈당</p>
                             <p className="text-[14px] font-bold text-[#8E8E8E]">
                                 <span className="text-[20px] font-semibold text-black">2</span>
                                 <span className="text-[14px] text-[#8E8E8E] font-normal">{" 회"}</span>
@@ -88,7 +91,7 @@ export default function Report_kid() {
 
                         {/* 고혈당 */}
                         <div className="bg-white rounded-[16px] p-4 text-center shadow-sm">
-                            <p className="text-[14px] text-[#E5412A] mb-1">고혈당</p>
+                            <p className="text-[12px] text-[#E5412A] mb-1">고혈당</p>
                             <p className="text-[14px] font-bold text-[#E5412A]">
                                 <span className="text-[20px] font-semibold text-black">3</span>
                                 <span className="text-[14px] text-[#8E8E8E] font-normal">{" 회"}</span>
@@ -97,7 +100,7 @@ export default function Report_kid() {
 
                         {/* 안정구간 */}
                         <div className="bg-white rounded-[16px] p-4 text-center shadow-sm">
-                            <p className="text-[14px] text-black mb-1">안정구간</p>
+                            <p className="text-[12px] text-black mb-1">안정구간</p>
                             <p className="text-[14px] font-bold text-[#8E8E8E]">
                                 <span className="text-[20px] font-semibold text-black">70</span>
                                 <span className="text-[14px] text-[#8E8E8E] font-normal">{" %"}</span>
@@ -106,16 +109,16 @@ export default function Report_kid() {
 
                         {/* 평균혈당 */}
                         <div className="bg-white rounded-[16px] p-4 text-center shadow-sm">
-                            <p className="text-[14px] text-[#00BBA9] mb-1">평균혈당</p>
+                            <p className="text-[12px] text-[#00BBA9] mb-1">평균혈당</p>
                             <p className="text-[14px] font-bold text-[#00BBA9]">
                                 <span className="text-[20px] font-semibold text-black">70</span>
-                                <span className="text-[8px] text-[#8E8E8E] font-normal">{" mg/dL"}</span>
+                                <span className="text-[8px] text-[#8E8E8E] font-normal">{"mg/dL"}</span>
                             </p>
                         </div>
                     </div>
 
                     {/* 액션 버튼 */}
-                    <div className="px-6 pb-6">
+                    <div className="px-6">
                         <button 
                             onClick={() => navigate("/badge")}
                             className="w-full h-[48px] bg-[#00BBA9] rounded-[12px] text-[#FFFFFF] text-[18px] flex items-center justify-between px-6"

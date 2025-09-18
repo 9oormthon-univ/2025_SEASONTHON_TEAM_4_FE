@@ -14,6 +14,7 @@ import QuestPage from "./screens/kid/QuestPage.jsx";
 import QuestUpdatePage from "./screens/kid/QuestUpdatePage.jsx";
 import Report_kid from "./screens/kid/Report_kid.jsx";
 import ParentsHomePage from "./screens/parents/Home_parents.jsx";
+import Note from "./screens/parents/Note.jsx";
 import Quest_detail from "./screens/parents/Quest_detail.jsx";
 import Quest_parents from "./screens/parents/Quest_parents.jsx";
 import ReportPage from "./screens/parents/ReportPage.jsx";
@@ -54,6 +55,7 @@ export default function App() {
                     <Route path="/report_kid" element={<Report_kid />} />
                     <Route path="/badge" element={<Badge />} />
                     <Route path="/parents_report" element={<Report_parents />} />
+                    <Route path="/note" element={<Note />} />
                     <Route path="/update" element={<QuestUpdatePage/>} />
                     <Route path="/quest-check" element={<QuestCheckPage/>} />
                     <Route path="/my" element={<My/>} />
