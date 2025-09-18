@@ -10,7 +10,7 @@ const nowTime = () => {
 export default function QuestUpdatePage() {
     const navigate = useNavigate();
     const handleBack = () => navigate(-1);
-    const handleComplete = () => navigate("/quest-check");
+    const handleComplete = () => navigate("/kid/quest/check");
 
     const [mealName, setMealName] = useState("");
     const [mealTime, setMealTime] = useState(nowTime());

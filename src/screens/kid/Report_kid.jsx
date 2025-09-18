@@ -9,9 +9,9 @@ export default function Report_kid() {
     const { pathname } = useLocation();
 
     const active =
-        pathname.startsWith("/quest") ? "quest" :
-            pathname.startsWith("/report") ? "report" :
-                pathname.startsWith("/my") ? "my" :
+        pathname.startsWith("/kid/quest") ? "quest" :
+            pathname.startsWith("/kid/report") ? "report" :
+                pathname.startsWith("/kid/my") ? "my" :
                     "home";
 
     return (
@@ -120,7 +120,7 @@ export default function Report_kid() {
                     {/* 액션 버튼 */}
                     <div className="px-6">
                         <button 
-                            onClick={() => navigate("/badge")}
+                            onClick={() => navigate("/kid/badge")}
                             className="w-full h-[48px] bg-[#00BBA9] rounded-[12px] text-[#FFFFFF] text-[18px] flex items-center justify-between px-6"
                         >
                             <span>금주의 배지 확인하기</span>
@@ -135,10 +135,10 @@ export default function Report_kid() {
             {/* TabBar */}
             <TabBar
                 active={active}
-                onHome={() => navigate("/Home_kid")}
-                onQuest={() => navigate("/quest")}
-                onReport={() => navigate("/report_kid")}
-                onMy={() => navigate("/my")}
+                onHome={() => navigate("/kid/home")}
+                onQuest={() => navigate("/kid/quest")}
+                onReport={() => navigate("/kid/report")}
+                onMy={() => navigate("/kid/my")}
             />
         </div>
     );

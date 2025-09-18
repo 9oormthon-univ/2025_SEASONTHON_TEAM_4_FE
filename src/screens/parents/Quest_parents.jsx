@@ -8,9 +8,9 @@ export default function Quest_parents() {
     const { pathname } = useLocation();
 
     const active =
-        pathname.startsWith("/quest") ? "quest" :
-            pathname.startsWith("/report") ? "report" :
-                pathname.startsWith("/my") ? "my" :
+        pathname.startsWith("/parent/quest") ? "quest" :
+            pathname.startsWith("/parent/report") ? "report" :
+                pathname.startsWith("/kid/my") ? "my" :
                     "home";
 
     // 요일별 완료 상태
@@ -114,7 +114,7 @@ export default function Quest_parents() {
                                 className={`rounded-2xl p-4 flex flex-col cursor-pointer ${
                                     quest.completed ? 'bg-white border border-gray-200' : 'bg-white border border-gray-200'
                                 }`}
-                                onClick={() => navigate('/quest_detail')}
+                                onClick={() => navigate('/parent/quest/detail')}
                             >
                                 <div className="mb-3">
                                     <span className={`inline-block px-2 py-1 rounded-md text-[12px] font-medium ${
@@ -151,10 +151,10 @@ export default function Quest_parents() {
             {/* TabBar */}
             <TabBar
                 active={active}
-                onHome={() => navigate("/Home_parents")}
-                onQuest={() => navigate("/quest_parents")}
-                onReport={() => navigate("/parents_report")}
-                onMy={() => navigate("/my")}
+                onHome={() => navigate("/parent/home")}
+                onQuest={() => navigate("/parent/quest")}
+                onReport={() => navigate("/parent/report")}
+                onMy={() => navigate("/kid/my")}
             />
         </div>
     );

@@ -43,7 +43,7 @@ export default function Login() {
 
             // // 토큰/세션 흉내
             // localStorage.setItem("token", "dev-mock-token");
-            navigate("/Home_kid"); // 로그인 성공 후 이동
+            navigate("/kid/home"); // 로그인 성공 후 이동
         } catch (e) {
             setErrMsg(e.message || "로그인 중 오류가 발생했습니다.");
         } finally {

@@ -11,13 +11,13 @@ export default function QuestPage() {
     const { pathname } = useLocation();
 
     const active =
-        pathname.startsWith("/home") ? "home" :
-            pathname.startsWith("/report") ? "report" :
-                pathname.startsWith("/my") ? "my" :
+        pathname.startsWith("/kid/home") ? "home" :
+            pathname.startsWith("/kid/report") ? "report" :
+                pathname.startsWith("/kid/my") ? "my" :
                     "quest";
 
     const handleNext = () => {
-        navigate("/quest-1");
+        navigate("/kid/quest/1");
     };
 
     const getCurrentMonth = () => {
@@ -256,10 +256,10 @@ export default function QuestPage() {
             {/* 바텀 네비게이션 */}
             <TabBar
                 active={active}
-                onHome={() => navigate("/Home_kid")}
-                onQuest={() => navigate("/quest")}
-                onReport={() => navigate("/report_kid")}
-                onMy={() => navigate("/my")}
+                onHome={() => navigate("/kid/home")}
+                onQuest={() => navigate("/kid/quest")}
+                onReport={() => navigate("/kid/report")}
+                onMy={() => navigate("/kid/my")}
             />
         </div>
     );

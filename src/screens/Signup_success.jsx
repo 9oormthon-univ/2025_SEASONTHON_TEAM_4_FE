@@ -36,7 +36,7 @@ function Signup_success() {
 
                     <button 
                         className="w-full h-[48px] bg-[#00BBA9] rounded-[12px] text-[#FFFFFF] font-semibold text-[18px] cursor-pointer mb-[20px]"
-                        onClick={() => {navigator("/Login")}}
+                        onClick={() => {navigator("/login")}}
                     >
                         로그인
                     </button>

@@ -338,10 +338,10 @@ export default function ParentHomePage({ score = 97 }) {
             <div className="relative">
                 <TabBar
                     active="home"
-                    onHome={() => navigate("/")}
-                    onQuest={() => navigate("/quest_parents")}
-                    onReport={() => navigate("/parents_report")}
-                    onMy={() => navigate("/my")}
+                    onHome={() => navigate("/parent/home")}
+                    onQuest={() => navigate("/parent/quest")}
+                    onReport={() => navigate("/parent/report")}
+                    onMy={() => navigate("/kid/my")}
                 />
                 {/* TabBar 어둡게 하는 오버레이 */}
                 {isFloatingMenuOpen && (

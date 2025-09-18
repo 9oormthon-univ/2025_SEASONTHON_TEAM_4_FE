@@ -17,7 +17,7 @@ const Signup_for_parents = () => {
         const valid = true;
         if (valid === true) {
             console.log('입력된 코드:', data.code);
-            navigate("/Home_parents");
+            navigate("/parent/home");
         } else {
             setError("code", { type: "manual", message: valid });
         }

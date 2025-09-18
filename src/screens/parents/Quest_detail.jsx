@@ -11,7 +11,7 @@ export default function Quest_detail() {
             {/* 상단 헤더 */}
             <div className="px-6 py-4 flex items-center">
                 <button 
-                    onClick={() => navigate("/quest_parents")}
+                    onClick={() => navigate("/parent/quest")}
                     className="mr-4"
                 >
                     <svg className="w-6 h-6 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -102,10 +102,10 @@ export default function Quest_detail() {
             {/* TabBar */}
             <TabBar
                 active="quest"
-                onHome={() => navigate("/Home_parents")}
-                onQuest={() => navigate("/quest_parents")}
-                onReport={() => navigate("/parents_report")}
-                onMy={() => navigate("/my")}
+                onHome={() => navigate("/parent/home")}
+                onQuest={() => navigate("/parent/quest")}
+                onReport={() => navigate("/parent/report")}
+                onMy={() => navigate("/kid/my")}
             />
         </div>
     );

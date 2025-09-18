@@ -8,9 +8,9 @@ export default function QuestCheckPage() {
     const { pathname } = useLocation();
 
     const active =
-        pathname.startsWith("/home") ? "home" :
-            pathname.startsWith("/report") ? "report" :
-                pathname.startsWith("/my") ? "my" :
+        pathname.startsWith("/kid/home") ? "home" :
+            pathname.startsWith("/kid/report") ? "report" :
+                pathname.startsWith("/kid/my") ? "my" :
                     "quest";
 
     return (
@@ -130,10 +130,10 @@ export default function QuestCheckPage() {
 
             <TabBar
                 active={active}
-                onHome={() => navigate("/Home_kid")}
-                onQuest={() => navigate("/quest")}
-                onReport={() => navigate("/report_kid")}
-                onMy={() => navigate("/my")}
+                onHome={() => navigate("/kid/home")}
+                onQuest={() => navigate("/kid/quest")}
+                onReport={() => navigate("/kid/report")}
+                onMy={() => navigate("/kid/my")}
             />
         </div>
     );

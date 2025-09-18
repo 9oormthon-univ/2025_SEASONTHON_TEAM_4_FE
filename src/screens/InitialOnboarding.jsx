@@ -41,9 +41,9 @@ function InitialOnboarding() {
                         <button className="action-button primary"
                                 onClick={()=>{navigate("/signup")}}>회원가입</button>
                         <button className="action-button secondary"
-                                onClick={()=>{navigate("/Login")}}>로그인</button>
+                                onClick={()=>{navigate("/login")}}>로그인</button>
                         <button className="action-button third"
-                                onClick={()=>{navigate("/Signup_for_parents")}}><span className="highlight">아이 코드</span>로 로그인하기</button>
+                                onClick={()=>{navigate("/parent/signup")}}><span className="highlight">아이 코드</span>로 로그인하기</button>
                     </div>
                 </div>
             )}

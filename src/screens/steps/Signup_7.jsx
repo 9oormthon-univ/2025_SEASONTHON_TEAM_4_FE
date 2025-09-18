@@ -67,7 +67,7 @@ const SignUp_7 = () => {
 
             // 성공 처리: 상태 초기화 후 로그인 화면으로 이동
             resetSignup?.();
-            navigate('/Signup_success');
+            navigate('/signup_success');
         } catch (e) {
             setApiError(e.message || '전송 중 오류가 발생했습니다.');
         } finally {

@@ -43,22 +43,22 @@ export default function App() {
                     <Route path="/signup_6" element={<Signup_6 />} />
                     <Route path="/signup_7" element={<Signup_7 />} />
                     <Route path="/login" element={<Login/>} />
-                    <Route path="/signup_for_parents" element={<Signup_for_parents />} />
+                    <Route path="/parent/signup" element={<Signup_for_parents />} />
                     <Route path="/signup_success" element={<Signup_success />} />
-                    <Route path="/Home_kid" element={<KidHomePage />} />
-                    <Route path="/Home_parents" element={<ParentsHomePage />} />
-                    <Route path="/quest" element={<QuestPage />} />
-                    <Route path="/quest-1" element={<QuestOnePage />} />
-                    <Route path="/quest_parents" element={<Quest_parents />} />
-                    <Route path="/quest_detail" element={<Quest_detail />} />
+                    <Route path="/kid/home" element={<KidHomePage />} />
+                    <Route path="/parent/home" element={<ParentsHomePage />} />
+                    <Route path="/kid/quest" element={<QuestPage />} />
+                    <Route path="/kid/quest/1" element={<QuestOnePage />} />
+                    <Route path="/parent/quest" element={<Quest_parents />} />
+                    <Route path="/parent/quest/detail" element={<Quest_detail />} />
                     <Route path="/report" element={<ReportPage />} />
-                    <Route path="/report_kid" element={<Report_kid />} />
-                    <Route path="/badge" element={<Badge />} />
-                    <Route path="/parents_report" element={<Report_parents />} />
-                    <Route path="/note" element={<Note />} />
-                    <Route path="/update" element={<QuestUpdatePage/>} />
-                    <Route path="/quest-check" element={<QuestCheckPage/>} />
-                    <Route path="/my" element={<My/>} />
+                    <Route path="/kid/report" element={<Report_kid />} />
+                    <Route path="/kid/badge" element={<Badge />} />
+                    <Route path="/parent/report" element={<Report_parents />} />
+                    <Route path="/kid/note" element={<Note />} />
+                    <Route path="/kid/quest/update" element={<QuestUpdatePage/>} />
+                    <Route path="/kid/quest/check" element={<QuestCheckPage/>} />
+                    <Route path="/kid/my" element={<My/>} />
                 </Routes>
             </SignupProvider>
         </Router>

@@ -45,7 +45,7 @@ export default function Note() {
             foodTags: selectedFoodTags,
             sourceTags: selectedSourceTags
         });
-        navigate("/Home_parents"); // 이전 페이지로 돌아가기
+        navigate("/parent/home"); // 이전 페이지로 돌아가기
     };
 
     return (

@@ -1,17 +1,16 @@
-import React, { useState } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
 import water from "../../assets/water.png";
 
 export default function QuestOnePage() {
     const navigate = useNavigate();
-    const [waterCount, setWaterCount] = useState(0);
 
     const handleBack = () => {
         navigate(-1); // 뒤로가기
     };
 
     const handleComplete = () => {
-        navigate("/update");
+        navigate("/kid/quest/update");
     };
 
     return (

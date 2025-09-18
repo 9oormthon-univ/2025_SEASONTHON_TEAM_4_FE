@@ -10,9 +10,9 @@ export default function Report_parents() {
     const [isFloatingMenuOpen, setIsFloatingMenuOpen] = useState(false);
 
     const active =
-        pathname.startsWith("/quest") ? "quest" :
-            (pathname.startsWith("/report") || pathname === "/parents_report") ? "report" :
-                pathname.startsWith("/my") ? "my" :
+        pathname.startsWith("/parent/quest") ? "quest" :
+            pathname.startsWith("/parent/report") ? "report" :
+                pathname.startsWith("/kid/my") ? "my" :
                     "home";
 
     // 플로팅 메뉴 액션 버튼들
@@ -211,7 +211,7 @@ export default function Report_parents() {
                                     className={`w-12 h-12 ${action.color} rounded-full flex items-center justify-center shadow-lg`}
                                     onClick={() => {
                                         setIsFloatingMenuOpen(false);
-                                        navigate('/note');
+                                        navigate('/kid/note');
                                     }}
                                 >
                                     <span className="text-xl">{action.icon}</span>
@@ -238,10 +238,10 @@ export default function Report_parents() {
             <div className="relative">
                 <TabBar
                     active={active}
-                    onHome={() => navigate("/Home_parents")}
-                    onQuest={() => navigate("/quest_parents")}
-                    onReport={() => navigate("/parents_report")}
-                    onMy={() => navigate("/my")}
+                    onHome={() => navigate("/parent/home")}
+                    onQuest={() => navigate("/parent/quest")}
+                    onReport={() => navigate("/parent/report")}
+                    onMy={() => navigate("/kid/my")}
                 />
                 {/* TabBar 어둡게 하는 오버레이 */}
                 {isFloatingMenuOpen && (
