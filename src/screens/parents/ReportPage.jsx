@@ -1,12 +1,40 @@
-// src/pages/ParentReportPage.jsx
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import Chart from "../../components/charts/Chart";
+import button_on from "../../assets/button_on.png";
+import button_off from "../../assets/button_off.png";
 
 export default function ReportPage() {
     const navigate = useNavigate();
     const [analyzeData, setAnalyzeData] = useState(null);
     const [loading, setLoading] = useState(true);
+
+    // 하단 리포트 카드 (for CheckPint)
+    const [expanded, setExpanded] = useState({
+        spike: false,
+        avg: false,
+        max: false,
+        min: false,
+    });
+
+    const toggleCard = (key) =>
+        setExpanded((prev) => ({ ...prev, [key]: !prev[key] }));
+
+    const spikeDetails = useMemo(
+        () => [
+            {
+                title: "1회차",
+                time: "오후 1시 20분",
+                reason: "점심 식사 후 탄수화물 섭취량이 많아요",
+            },
+            {
+                title: "2회차",
+                time: "오후 8시 40분",
+                reason: "저녁 운동 전 간식을 많이 먹었어요",
+            },
+        ],
+        []
+    );
 
     const handleBack = () => navigate(-1);
 
@@ -15,15 +43,10 @@ export default function ReportPage() {
             try {
                 const response = await fetch(
                     "https://carie-uninflated-conjointly.ngrok-free.app/analyze",
-                    {
-                        headers: {
-                            "ngrok-skip-browser-warning": "1234",
-                        },
-                    }
+                    { headers: { "ngrok-skip-browser-warning": "1234" } }
                 );
                 if (!response.ok) throw new Error(`HTTP ${response.status}`);
                 const data = await response.json();
-                // 서버 응답 형식: { result: { "단짝이의 평가": "...", ... } } 라고 가정
                 setAnalyzeData(data?.result ?? null);
             } catch (err) {
                 console.error("Failed to fetch analyze data:", err);
@@ -37,7 +60,7 @@ export default function ReportPage() {
     }, []);
 
     return (
-        <div className="min-h-screen bg-gray-50 flex flex-col">
+        <div className="min-h-screen bg-white flex flex-col">
             {/* 헤더 */}
             <div className="flex items-center justify-between px-6 py-4 bg-white">
                 <button onClick={handleBack} className="p-2" type="button">
@@ -146,12 +169,215 @@ export default function ReportPage() {
                             </div>
                         </>
                     ) : (
-                        <div className="text-center py-8">
-                            <p className="text-gray-600">데이터를 불러올 수 없습니다.</p>
+                        <div className="CheckPint grid">
+                            {/* 1. 혈당 스파이크 */}
+                            <div className={`CheckPint box ${expanded.spike ? "on" : ""}`}>
+                                <button
+                                    className="toggle"
+                                    onClick={() => toggleCard("spike")}
+                                    type="button"
+                                    aria-expanded={expanded.spike}
+                                    aria-controls="spike-detail"
+                                >
+                                    <img src={expanded.spike ? button_on : button_off} alt="" />
+                                </button>
+                                <p className="CheckPint title">혈당 스파이크 : 2회</p>
+                                <p className="CheckPint description">오늘 2번의 급상승이 있었어요</p>
+
+                                <div id="spike-detail" className={`detail ${expanded.spike ? "open" : ""}`}>
+                                    {spikeDetails.map((d, i) => (
+                                        <div key={i} className="detail-card">
+                                            <div className="dot" />
+                                            <div className="lines">
+                                                <p className="row-strong">{d.title}</p>
+                                                <p className="row">시간 : {d.time}</p>
+                                                <p className="row">원인 : {d.reason}</p>
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+
+                            {/* 2. 평균 혈당 */}
+                            <div className={`CheckPint box ${expanded.avg ? "on" : ""}`}>
+                                <button
+                                    className="toggle"
+                                    onClick={() => toggleCard("avg")}
+                                    type="button"
+                                    aria-expanded={expanded.avg}
+                                    aria-controls="avg-detail"
+                                >
+                                    <img src={expanded.avg ? button_on : button_off} alt="" />
+                                </button>
+                                <p className="CheckPint title">평균 혈당이 높음</p>
+                                <p className="CheckPint description">평소보다 조금 높아요</p>
+
+                                <div id="avg-detail" className={`detail ${expanded.avg ? "open" : ""}`}>
+                                    <div className="detail-card">
+                                        <div className="dot" />
+                                        <div className="lines">
+                                            <p className="row-strong">분석</p>
+                                            <p className="row">오늘 2번의 급상승이 있었어요</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {/* 3. 최고 혈당 */}
+                            <div className={`CheckPint box ${expanded.max ? "on" : ""}`}>
+                                <button
+                                    className="toggle"
+                                    onClick={() => toggleCard("max")}
+                                    type="button"
+                                    aria-expanded={expanded.max}
+                                    aria-controls="max-detail"
+                                >
+                                    <img src={expanded.max ? button_on : button_off} alt="" />
+                                </button>
+                                <p className="CheckPint title">최고 혈당은 105</p>
+                                <p className="CheckPint description">
+                                    가장 높았을 때는 105였지만 곧 안정을 찾았어요
+                                </p>
+
+                                <div id="max-detail" className={`detail ${expanded.max ? "open" : ""}`}>
+                                    <div className="detail-card">
+                                        <div className="dot" />
+                                        <div className="lines">
+                                            <p className="row-strong">설명</p>
+                                            <p className="row">식후 1~2시간 구간에서 최고점.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {/* 4. 최저 혈당 */}
+                            <div className={`CheckPint box ${expanded.min ? "on" : ""}`}>
+                                <button
+                                    className="toggle"
+                                    onClick={() => toggleCard("min")}
+                                    type="button"
+                                    aria-expanded={expanded.min}
+                                    aria-controls="min-detail"
+                                >
+                                    <img src={expanded.min ? button_on : button_off} alt="" />
+                                </button>
+                                <p className="CheckPint title">최저 혈당은 50</p>
+                                <p className="CheckPint description">
+                                    가장 낮았을 때는 50였지만 곧 안정을 찾았어요
+                                </p>
+
+                                <div id="min-detail" className={`detail ${expanded.min ? "open" : ""}`}>
+                                    <div className="detail-card">
+                                        <div className="dot" />
+                                        <div className="lines">
+                                            <p className="row-strong">설명</p>
+                                            <p className="row">운동 직후/공복 구간에서 저점.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     )}
                 </div>
             </div>
+
+            {/* 컴포넌트 전용 스타일 */}
+            <style>{`
+
+        .CheckPint.grid {
+          display: grid;
+          grid-template-columns: 1fr;
+          gap: 12px;
+        }
+        .CheckPint.box {
+          position: relative;
+          background: #fff;
+          border: 1px solid #EFF1F3;
+          border-radius: 16px;
+          padding: 14px 16px 10px 52px;
+          box-shadow: 0 1px 0 rgba(16,24,40,0.02);
+          transition: border-color .2s ease, box-shadow .2s ease;
+        }
+        .CheckPint.box.on {
+          border-color: #D7F0EC;
+          box-shadow: 0 4px 16px rgba(26,127,111,0.08);
+        }
+        .CheckPint.box .toggle {
+          position: absolute;
+          left: 12px;
+          top: 14px;
+          width: 28px;
+          height: 28px;
+          padding: 0;
+          border: 0;
+          background: transparent;
+          cursor: pointer;
+        }
+        .CheckPint.box .toggle img { width: 28px; height: 28px; display: block; }
+        .CheckPint.title {
+          margin: 0 0 4px 0;
+          font-size: 15px;
+          font-weight: 600;
+          color: #0B0B0B;
+        }
+        .CheckPint.description {
+          margin: 0;
+          font-size: 13px;
+          color: #6B7280;
+        }
+
+        /* 펼침 디테일 애니메이션 */
+        .detail {
+          overflow: hidden;
+          max-height: 0;
+          opacity: 0;
+          transform: translateY(-6px);
+          transition: max-height .36s cubic-bezier(.2,.7,.2,1),
+                      opacity .28s ease,
+                      transform .36s cubic-bezier(.2,.7,.2,1);
+        }
+        .detail.open {
+          max-height: 320px;
+          opacity: 1;
+          transform: translateY(0);
+          margin-top: 10px;
+        }
+
+        .detail-card {
+          display: flex;
+          gap: 10px;
+          background: #F8FAFA;
+          border: 1px solid #ECF6F4;
+          border-radius: 12px;
+          padding: 12px;
+        }
+        .detail-card + .detail-card { margin-top: 8px; }
+        .detail-card .dot {
+          width: 5px; height: 5px;
+          border-radius: 9999px;
+          background: #4B4B4B;
+          margin-top: 7px;
+          margin-left: 3px;
+          flex: 0 0 5px;
+        }
+        .detail-card .lines { flex: 1; min-width: 0; }
+        .detail-card .row-strong {
+          margin: 0 0 4px 0;
+          font-size: 14px;
+          font-weight: 700;
+          color: 4B4B4B;
+        }
+        .detail-card .row {
+          margin: 0;
+          font-size: 13px;
+          color: #334155;
+          line-height: 1.45;
+        }
+
+        @media (min-width: 420px) {
+          .min-h-screen > .flex-1 { max-width: 420px; margin: 0 auto; }
+        }
+      `}</style>
         </div>
     );
 }
