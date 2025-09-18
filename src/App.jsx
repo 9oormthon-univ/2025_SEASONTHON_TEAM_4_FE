@@ -5,6 +5,7 @@ import InitialOnboarding from "./screens/InitialOnboarding";
 import Login from "./screens/Login.jsx";
 import Signup_for_parents from "./screens/Signup_for_parents.jsx";
 import Signup_success from "./screens/Signup_success.jsx";
+import Badge from "./screens/kid/Badge.jsx";
 import KidHomePage from "./screens/kid/Home_kid.jsx";
 import My from "./screens/kid/My.jsx";
 import QuestCheckPage from "./screens/kid/QuestCheckPage.jsx";
@@ -51,6 +52,7 @@ export default function App() {
                     <Route path="/quest_detail" element={<Quest_detail />} />
                     <Route path="/report" element={<ReportPage />} />
                     <Route path="/report_kid" element={<Report_kid />} />
+                    <Route path="/badge" element={<Badge />} />
                     <Route path="/parents_report" element={<Report_parents />} />
                     <Route path="/update" element={<QuestUpdatePage/>} />
                     <Route path="/quest-check" element={<QuestCheckPage/>} />

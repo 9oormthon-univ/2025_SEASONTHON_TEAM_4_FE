@@ -6,28 +6,15 @@ import "../styles/Signup_2.css";
 
 const Signup_for_parents = () => {
     const navigate = useNavigate();
-    const [isChecking, setIsChecking] = useState(false);
+    const [isChecking] = useState(false);
 
     const { register, handleSubmit, formState: { errors, isValid }, setError } = useForm({
         mode: "onChange"
     });
 
-    const checkCodeInDB = async (code) => {
-        setIsChecking(true);
-        try {
-            const res = await fetch("/data/codes.json");
-            const data = await res.json();
-            const valid = data.codes.includes(code);
-            setIsChecking(false);
-            return valid || "존재하지 않는 코드입니다!";
-        } catch (err) {
-            setIsChecking(false);
-            return "서버 오류가 발생했습니다!";
-        }
-    };
-
     const onSubmit = async (data) => {
-        const valid = await checkCodeInDB(data.code);
+        // const valid = await checkCodeInDB(data.code);
+        const valid = true;
         if (valid === true) {
             console.log('입력된 코드:', data.code);
             navigate("/Home_parents");
