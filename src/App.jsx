@@ -5,11 +5,18 @@ import InitialOnboarding from "./screens/InitialOnboarding";
 import Login from "./screens/Login.jsx";
 import Signup_for_parents from "./screens/Signup_for_parents.jsx";
 import Signup_success from "./screens/Signup_success.jsx";
+import Badge from "./screens/kid/Badge.jsx";
 import KidHomePage from "./screens/kid/Home_kid.jsx";
+import My from "./screens/kid/My.jsx";
 import QuestOnePage from "./screens/kid/QuestOnePage.jsx";
 import QuestPage from "./screens/kid/QuestPage.jsx";
+import Report_kid from "./screens/kid/Report_kid.jsx";
 import ParentsHomePage from "./screens/parents/Home_parents.jsx";
+import Note from "./screens/parents/Note.jsx";
+import Quest_detail from "./screens/parents/Quest_detail.jsx";
+import Quest_parents from "./screens/parents/Quest_parents.jsx";
 import ReportPage from "./screens/parents/ReportPage.jsx";
+import Report_parents from "./screens/parents/Report_parents.jsx";
 import Signup_0 from "./screens/steps/Signup_0.jsx";
 import Signup_1 from "./screens/steps/Signup_1.jsx";
 import SignUp_2 from "./screens/steps/Signup_2.jsx";
@@ -40,7 +47,14 @@ export default function App() {
                     <Route path="/Home_parents" element={<ParentsHomePage />} />
                     <Route path="/quest" element={<QuestPage />} />
                     <Route path="/quest-1" element={<QuestOnePage />} />
+                    <Route path="/quest_parents" element={<Quest_parents />} />
+                    <Route path="/quest_detail" element={<Quest_detail />} />
                     <Route path="/report" element={<ReportPage />} />
+                    <Route path="/report_kid" element={<Report_kid />} />
+                    <Route path="/parents_report" element={<Report_parents />} />
+                    <Route path="/badge" element={<Badge />} />
+                    <Route path="/my" element={<My />} />
+                    <Route path="/note" element={<Note />} />
                 </Routes>
             </SignupProvider>
         </Router>

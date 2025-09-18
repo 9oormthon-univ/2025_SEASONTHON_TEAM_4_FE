@@ -1,15 +1,19 @@
 @import "tailwindcss";
 
-html, body, #root { height: 100%; margin: 0;
-                    font-family: Inter, system-ui, -apple-system, "Pretendard";
+html, body, #root { 
+    height: 100vh; 
+    width: 100vw;
+    margin: 0;
+    padding: 0;
+    font-family: Inter, system-ui, -apple-system, "Pretendard";
 }
 
 .screen {
     position: relative;
-    width: 100%;
-    max-width: 390px;
+    width: 100vw;
     height: 100vh;
-    margin: 0 auto;
+    margin: 0;
+    padding: 0;
     overflow: hidden;
     display: block;
 }
@@ -78,7 +82,7 @@ html, body, #root { height: 100%; margin: 0;
 }
 .app-content {
     font-size: 24px;
-    font-weight: bolder;
+    font-weight: normal;
     color: #4B4B4B;
     margin-top: 19px;
     line-height: 26.5px;
@@ -93,21 +97,25 @@ html, body, #root { height: 100%; margin: 0;
     width: 100%;
     align-items: center;
     padding: 0 20px 10px;
+    box-sizing: border-box;
+    margin-bottom: 20px;
 }
 
 .action-button {
-    width: 350px;
+    width: calc(100% - 40px);
+    max-width: 350px;
     height: 48px;
     border-radius: 6px;
     border: none;
-    font-weight: 550;
+    font-weight: semibold;
     font-size: 16px;
     color: black;
     cursor: pointer;
+    box-sizing: border-box;
 }
 .action-button.primary {
     background: #00bba9;
-    color: #000000;
+    color: #ffffff;
 }
 .action-button.primary:hover {
     filter: brightness(0.95);

@@ -1,8 +1,8 @@
+import { yupResolver } from "@hookform/resolvers/yup";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import * as yup from "yup";
-import { yupResolver } from "@hookform/resolvers/yup";
 import { useNavigate } from "react-router-dom";
+import * as yup from "yup";
 import { useSignup } from "../../data/SignupData.jsx";
 import "../../styles/Signup.css";
 
@@ -25,7 +25,6 @@ const Signup_0 = () => {
         register,
         handleSubmit,
         formState: { errors, isValid },
-        reset,
     } = useForm({
         mode: "onChange",
         resolver: yupResolver(schema),
@@ -53,34 +52,40 @@ const Signup_0 = () => {
             <div className="title-bar"></div>
 
             <div className="frame">
-                <form onSubmit={handleSubmit(onSubmit)}>
-                    <div className="text-area">
-                        <h1>처음 뵙겠습니다!</h1>
-                        <h1>단짝이입니다</h1>
-                    </div>
+                <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col justify-between h-full w-full">
+                    <div className="flex flex-col gap-[32px]">
+                        <div className="text-[28px] font-semibold">
+                            <h1>만나서 반가워!</h1>
+                            <h1>단짝이와 시작해보자</h1>
+                        </div>
 
-                    <div>
-                        <p className="label">이메일</p>
-                        <input
-                            className="input-box"
-                            type="email"
-                            placeholder="이메일을 입력해주세요"
-                            {...register("email")}
-                        />
-                        {errors.email && <p className="error-message">{errors.email.message}</p>}
+                        <div className="flex flex-col gap-[12px] w-full mt-[10px]">
+                            <p className="text-[#8E8E8E]">이메일</p>
+                            <input
+                                className="w-full border border-[#CACACA] rounded-[12px] p-[12px] px-[16px]"
+                                type="email"
+                                placeholder="사용하실 이메일을 입력해주세요"
+                                {...register("email")}
+                            />
+                            <div className="h-[20px] flex items-start ml-0.5">
+                                {errors.email && <p className="text-[#E11D48] text-[14px]">{errors.email.message}</p>}
+                            </div>
 
-                        <p className="label">비밀번호</p>
-                        <input
-                            className="input-box"
-                            type="password"
-                            placeholder="비밀번호를 입력해주세요"
-                            {...register("password")}
-                        />
-                        {errors.password && <p className="error-message">{errors.password.message}</p>}
+                            <p className="text-[#8E8E8E]">비밀번호</p>
+                            <input
+                                className="w-full border border-[#CACACA] rounded-[12px] p-[12px] px-[16px]"
+                                type="password"
+                                placeholder="비밀번호를 입력해주세요"
+                                {...register("password")}
+                            />
+                            <div className="h-[20px] flex items-start ml-0.5">
+                                {errors.password && <p className="text-[#E11D48] text-[14px]">{errors.password.message}</p>}
+                            </div>
+                        </div>
                     </div>
 
                     <button
-                        className="button-box"
+                        className="w-full h-[48px] bg-[#00BBA9] rounded-[12px] text-[#FFFFFF] font-semibold text-[18px] cursor-pointer mb-[20px]"
                         type="submit"
                         disabled={!isValid || loading}
                         style={{ opacity: isValid && !loading ? 1 : 0.5 }}

@@ -1,6 +1,6 @@
+import { useState } from "react";
 import { useForm } from 'react-hook-form';
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
 import "../styles/Signup.css";
 import "../styles/Signup_2.css";
 
@@ -40,25 +40,32 @@ const Signup_for_parents = () => {
         <>
             <div className="title-bar"></div>
             <div className="frame">
-                <form onSubmit={handleSubmit(onSubmit)}>
-                    <div className="text-area">
-                        <h1>아이의</h1>
-                        <h1>코드를 입력해주세요</h1>
+                <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col justify-between h-full w-full">
+                    <div className="flex flex-col gap-[32px]">
+                        <div className="text-[28px] font-semibold">
+                            <h1>아이의</h1>
+                            <h1>코드를 입력해주세요</h1>
+                        </div>
+                        
+                        <div className="text-[16px] font-medium text-[#4B4B4B] leading-[28.9px]">
+                            마이페이지 &gt; 코드
+                        </div>
+
+                        <div className="flex flex-col gap-[12px] w-full mt-[10px]">
+                            <input
+                                className="w-full border border-[#CACACA] rounded-[12px] p-[12px] px-[16px]"
+                                type="text"
+                                placeholder="이곳에 코드를 입력해주세요"
+                                {...register("code", { required: "코드를 입력해주세요!" })}
+                            />
+                            <div className="h-[20px] flex items-start ml-0.5">
+                                {errors.code && <p className="text-[#E11D48] text-[14px]">{errors.code.message}</p>}
+                            </div>
+                        </div>
                     </div>
-                    <div className="lower-text-area">
-                        <h3>마이페이지 &gt; 코드</h3>
-                    </div>
-                    <div>
-                        <input
-                            className="input-box"
-                            type="text"
-                            placeholder="이곳에 코드를 입력해주세요"
-                            {...register("code", { required: "코드를 입력해주세요!" })}
-                        />
-                        {errors.code && <p className="error-message">{errors.code.message}</p>}
-                    </div>
+
                     <button
-                        className="button-box"
+                        className="w-full h-[48px] bg-[#00BBA9] rounded-[12px] text-[#FFFFFF] font-semibold text-[18px] cursor-pointer mb-[20px]"
                         type="submit"
                         disabled={!isValid || isChecking}
                         style={{ opacity: !isValid || isChecking ? 0.5 : 1 }}
